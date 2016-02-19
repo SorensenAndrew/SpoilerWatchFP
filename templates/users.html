@@ -1,0 +1,10 @@
+{%include 'nav.html'%}
+{%for person in data%}
+<br>
+<p style="margin-top:10px;font-weight:bold;">Update: {{person}}</p>
+
+<a href="/editUser/{{person}}" style="margin-bottom:10px;">Edit</a>
+<a href="/deleteUser/{{person}}" style="margin:5px">Delete</a>
+<br>
+{%endfor%}
+

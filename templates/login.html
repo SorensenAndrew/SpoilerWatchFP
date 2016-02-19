@@ -1,0 +1,15 @@
+{%include 'nav.html'%}
+<div id="login">
+    <h2>Login</h2>
+    <form action="/checklogin" method="post">
+        Username: <input type="text" name="username" style="margin:5px">
+        <br>
+        Password: <input type="password" name="password" style="margin:5px">
+        <br>
+        <input class="button" type="submit" style="margin:5px">
+    </form>
+</div>
+<div id="signup">
+    <h2>Not A User?</h2>
+    <a class="button" href="/newUser"">Sign Up!</a>
+</div>

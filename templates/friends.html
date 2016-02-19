@@ -1,0 +1,13 @@
+{%include 'nav.html'%}
+<h2>Friends List</h2>
+{%for data in data%}
+<form action="/friendData" method="post">
+    <br>
+    <p>{{data[1]}}</p>
+    <br>
+    <input class="button" type="submit" value="See Shows">
+    <input name="friend" style="display:none;" value="{{data[1]}}">
+    <br>
+</form>
+{%endfor%}
+
