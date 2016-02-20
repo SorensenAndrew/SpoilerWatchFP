@@ -60,7 +60,7 @@ def checklogin():
     data = cursor.fetchall()
     if data:
         data = {"username":session["username"],"password":session["password"]}
-        return render_template('showSearch.html',data=data)
+        return render_template('userHome.html',data=data)
     else:
         return redirect('/login')
 
@@ -158,7 +158,21 @@ def checkAdminLogin():
     else:
         return redirect('/login')
 
-################################################################################################################
+###################### Complaint File ###############################################
+
+@app.route('/fileComplaint', methods=['post','get'])
+def complaint():
+    name = session["username"]
+    complaint = request.form['complaint']
+    db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
+    cursor = db.cursor()
+    cursor.execute("insert into complaint(user, complaint)values(%s,%s)", (name, complaint))
+    db.commit()
+    return redirect('/friends')
+
+
+
+######################################################################################
 
 @app.route('/parseJSON',methods=['post', 'get'])
 def parseJSON():
