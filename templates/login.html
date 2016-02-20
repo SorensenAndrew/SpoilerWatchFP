@@ -9,7 +9,22 @@
         <input class="button" type="submit" style="margin:5px">
     </form>
 </div>
+<div id="adminLogin">
+    <h2>Admin Login</h2>
+    <form action="/checkAdminLogin" method="post">
+        Username: <input type="text" name="adminUser" style="margin:5px">
+        <br>
+        Password: <input type="password" name="adminPassword" style="margin:5px">
+        <br>
+        <input class="button" type="submit" style="margin:5px">
+    </form>
+</div>
 <div id="signup">
     <h2>Not A User?</h2>
-    <a class="button" href="/newUser"">Sign Up!</a>
+    <a class="button" href="/newUser">Sign Up!</a>
 </div>
+<div id="adminSignUp">
+    <h2>Admin Registration</h2>
+    <a class="button" href="/newAdmin">Register</a>
+</div>
+

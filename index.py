@@ -112,6 +112,53 @@ def addUser():
     db.commit()
     return redirect('/login')
 
+################## Admin SignUp/Login ##################################
+
+@app.route('/addAdmin',methods=['post', 'get'])
+def addAdmin():
+    aname = request.form['newAdmin']
+    apass = request.form['newAdminPassword']
+    db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
+    cursor = db.cursor()
+    cursor.execute("insert into admin(adminUser, password)values(%s,%s)", (aname, apass))
+    db.commit()
+    return redirect('/login')
+
+@app.route('/newAdmin')
+def newAdmin():
+    return render_template('addAdminAccess.html')
+
+@app.route('/adminCheck',methods=['post', 'get'])
+def adminCheck():
+    session["adminAccessPassword"] = request.form["adminAccessPassword"]
+    apass = request.form['adminAccessPassword']
+    db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
+    cursor = db.cursor()
+    cursor.execute("select * from adminPass", (session["adminAccessPassword"]))
+    data = cursor.fetchall()
+    if data:
+        data = {"adminAccessPassword":session["adminAccessPassword"]}
+        return render_template('adminReg.html',data=data)
+    else:
+        return redirect('/login')
+
+@app.route('/checkAdminLogin', methods=['post','get'])
+def checkAdminLogin():
+    session["adminUser"] = request.form["adminUser"]
+    session["adminPassword"] = request.form["adminPassword"]
+    db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
+    cursor = db.cursor()
+    hashval = hashlib.md5(request.form["adminPassword"]).hexdigest()
+
+    cursor.execute("select * from admin where adminUser=%s and password=%s", (session["adminUser"], session["adminPassword"]))
+    data = cursor.fetchall()
+    if data:
+        data = {"adminUser":session["adminUser"],"adminPassword":session["adminPassword"]}
+        return render_template('adminHome.html',data=data)
+    else:
+        return redirect('/login')
+
+################################################################################################################
 
 @app.route('/parseJSON',methods=['post', 'get'])
 def parseJSON():
