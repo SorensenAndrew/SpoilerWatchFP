@@ -1,0 +1,10 @@
+{%include 'nav.html'%}
+<h2>Last Episodes Watched:</h2>
+{%for show in data%}
+<br>
+<p style="margin-top:10px;font-weight:bold;">Show Title: {{show[0]}}</p>
+<p style="margin-top:10px;font-weight:bold;">Episode Title: {{show[1]}}</p>
+<p style="margin-top:10px;font-weight:bold;">Season Number: {{show[2]}}</p>
+<p style="margin-top:10px;font-weight:bold;">Episode Number: {{show[3]}}</p>
+{%endfor%}
+

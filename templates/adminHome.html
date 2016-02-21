@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Admin </h1>
+{%for complaint in complaint%}
+<form action="/deleteComplaint" method="post">
+    <br>
+    <p style="margin-top:10px;font-weight:bold;">Report from: {{complaint[0]}}</p>
+    <p style="margin-top:10px;font-weight:bold;">Problem: {{complaint[1]}}</p>
+    <input class="button" type="submit" value="Delete">
+</form>
+{%endfor%}
+</body>
+</html>
