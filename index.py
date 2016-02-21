@@ -162,11 +162,12 @@ def checkAdminLogin():
 
 @app.route('/fileComplaint', methods=['post','get'])
 def complaint():
-    name = session["username"]
+    name = "testName"
     complaint = request.form['complaint']
+    unchecked = 0
     db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
     cursor = db.cursor()
-    cursor.execute("insert into complaint(user, complaint)values(%s,%s)", (name, complaint))
+    cursor.execute("insert into complaint(user, complaint, complete)values(%s,%s,%s)", (name, complaint, unchecked))
     db.commit()
     return redirect('/friends')
 

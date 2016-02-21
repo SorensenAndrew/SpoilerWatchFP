@@ -5,5 +5,16 @@
 </head>
 <body>
     <h1>Admin </h1>
+{%for show in showdata%}
+<form action="/deleteShow" method="post">
+    <br>
+    <p style="margin-top:10px;font-weight:bold;">Show Title: {{show[0]}}</p>
+    <p style="margin-top:10px;font-weight:bold;">Episode Title: {{show[1]}}</p>
+    <p style="margin-top:10px;font-weight:bold;">Season Number: {{show[2]}}</p>
+    <p style="margin-top:10px;font-weight:bold;">Episode Number: {{show[3]}}</p>
+    <input name="random" style="display:none;" value="{{show[0]}}">
+    <input class="button" type="submit" value="Delete">
+</form>
+{%endfor%}
 </body>
 </html>
