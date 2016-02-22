@@ -10,5 +10,15 @@
     <input name="random" style="display:none;" value="{{show[0]}}">
     <input class="button" type="submit" value="Delete">
 </form>
+
+<h2>Update Shows</h2>
+<form action="/updateShow" method="post">
+    Show: <input name="show">
+    Title: <input name="title">
+    Season: <input name="season" type="tel">
+    Episode: <input name="episode" type="tel">
+    <br>
+    <input class="button" type="submit" style="margin:15px" value="Add Show">
+</form>
 {%endfor%}
 

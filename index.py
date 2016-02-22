@@ -210,6 +210,23 @@ def deleteshow():
     db.commit()
     return redirect('/shows')
 
+#### Show Update ###########
+
+@app.route('/updateShow', methods=['post', 'get'])
+def updateshow():
+    name = session["username"]
+    show = request.form["show"]
+    showTitle = request.form["title"]
+    showSeason = request.form["season"]
+    showEpisode = request.form["episode"]
+    db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
+    cursor = db.cursor()
+    cursor.execute("update showData set showTitle=%s, showSeason=%s, showEpisode=%s where showName='" + show + "' and username='" + name + "'", (showTitle, showSeason, showEpisode ))
+    db.commit()
+    return redirect('/shows')
+
+
+########################
 
 @app.route('/logout')
 def logout():
@@ -228,7 +245,7 @@ def formtest():
     hashed = hashlib.md5(userinput).hexdigest()
     return hashed
 
-# HTML Scraping
+################### HTML Scraping ###################################
 page = requests.get('http://econpy.pythonanywhere.com/ex/001.html')
 tree = html.fromstring(page.content)
 
