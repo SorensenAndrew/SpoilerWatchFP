@@ -22,10 +22,15 @@ app.secret_key = "4321"
 def index():
     return redirect('/login')
 
+@app.route('/home')
+def navhome():
+    return render_template('userHome.html')
+
 
 @app.route('/login', methods=['post','get'])
 def login():
     return render_template('login.html')
+
 
 
 @app.route('/users')
