@@ -1,7 +1,7 @@
 {%include 'nav.html'%}
 <h3 class="header">Last Episodes Watched:</h3>
 {%for show in showdata%}
-<form class="bubble" action="/deleteShow" method="post">
+<form class="medium-3 columns bubble" action="/deleteShow" method="post">
     <br>
     <h4 style="margin-top:10px;font-weight:bold;">{{show[0]}}</h4>
     <h5 style="margin-top:10px;font-weight:bold;">"{{show[1]}}"</h5>
@@ -12,12 +12,12 @@
 </form>
 
 {%endfor%}
-<h3 class="header">Update Shows</h3>
-<form class="medium-4 columns" action="/updateShow" method="post">
-    <input value="Show Title" name="show">
-    <input value="Episode Title" name="title">
-    <input value="Season Number" name="season">
-    <input value="Episode Number" name="episode">
+<form class="medium-9 columns" action="/updateShow" method="post">
+    <h3 class="header">Update Shows</h3>
+    <input placeholder="Show Title" name="show">
+    <input placeholder="Episode Title" name="title">
+    <input placeholder="Season Number" name="season">
+    <input placeholder="Episode Number" name="episode">
     <br>
     <input class="submit" type="submit" style="margin:15px" value="Update Show">
 </form>
