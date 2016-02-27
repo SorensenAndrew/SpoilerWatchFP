@@ -14,6 +14,7 @@ from urllib2 import Request
 from json import load
 from lxml import html
 import requests
+import time
 
 app = Flask(__name__)
 app.secret_key = "4321"
@@ -22,11 +23,18 @@ app.secret_key = "4321"
 def index():
     return redirect('/login')
 
+###### News Feed #####
+
 @app.route('/home')
 def navhome():
-    return render_template('userHome.html')
+    name = session["username"]
+    db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
+    cursor = db.cursor()
+    cursor.execute("select * from showData where username!='"+ name + "'")
+    showdata = cursor.fetchall()
+    return render_template('userHome.html',showdata=showdata)
 
-
+###########################
 @app.route('/login', methods=['post','get'])
 def login():
     return render_template('login.html')

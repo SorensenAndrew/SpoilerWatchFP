@@ -1,7 +1,20 @@
 {%include 'nav.html'%}
 <body>
-    <h3 class="header">User Home/News Feed</h3>
-<form class="medium-3 columns" action="/fileComplaint">
+<h3 class="header">News Feed</h3>
+{%for show in showdata|sort%}
+<form class="medium-6 columns bubble feed" action="/deleteShow" method="post">
+    <br>
+    <h4 style="margin-top:10px;font-weight:bold;">{{show[0]}}</h4>
+    <h5 style="margin-top:10px;font-weight:bold;">{{show[4]}}</h5>
+    <h5 style="margin-top:10px;font-weight:bold;">"{{show[1]}}"</h5>
+    <p style="margin-top:10px;font-weight:bold;">Season: {{show[2]}}</p>
+    <p style="margin-top:10px;font-weight:bold;">Episode: {{show[3]}}</p>
+    <input name="random" style="display:none;" value="{{show[0]}}">
+</form>
+
+{%endfor%}
+
+<form class="medium-6 columns" action="/fileComplaint">
     <h4 class="header">Submit Problem</h4>
     <br>
     <input value="Report a problem you have found..." type="text" name="complaint" style="margin:5px">

@@ -4,11 +4,13 @@
 
 }
 
+
 .bubble{
     background-color: whitesmoke;
     border-radius: 25px;
-    padding:25px;
+    padding:30px;
     margin: 10px;
+    text-align: center;
 }
 
 .header, .nav{
