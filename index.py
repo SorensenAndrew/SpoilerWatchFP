@@ -34,7 +34,18 @@ def navhome():
     showdata = cursor.fetchall()
     return render_template('userHome.html',showdata=showdata)
 
+@app.route('/comment', methods=['post','get'])
+def comment():
+    comment = request.form["comment"]
+    db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
+    cursor = db.cursor()
+    cursor.execute("insert into comments(comment)values(%s)", (comment))
+    render_template('userHome.html')
+
+
 ###########################
+
+
 @app.route('/login', methods=['post','get'])
 def login():
     return render_template('login.html')
@@ -73,7 +84,7 @@ def checklogin():
     data = cursor.fetchall()
     if data:
         data = {"username":session["username"],"password":session["password"]}
-        return render_template('userHome.html',data=data)
+        return render_template('showSearch.html',data=data)
     else:
         return redirect('/login')
 

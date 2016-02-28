@@ -2,14 +2,15 @@
 <body>
 <h3 class="header">News Feed</h3>
 {%for show in showdata|sort%}
-<form class="medium-6 columns bubble feed" action="/deleteShow" method="post">
+<form class="medium-6 columns bubble feed" action="/comment" method="post">
     <br>
     <h4 style="margin-top:10px;font-weight:bold;">{{show[0]}}</h4>
     <h5 style="margin-top:10px;font-weight:bold;">{{show[4]}}</h5>
     <h5 style="margin-top:10px;font-weight:bold;">"{{show[1]}}"</h5>
     <p style="margin-top:10px;font-weight:bold;">Season: {{show[2]}}</p>
     <p style="margin-top:10px;font-weight:bold;">Episode: {{show[3]}}</p>
-    <input name="random" style="display:none;" value="{{show[0]}}">
+    <input name="comment">
+    <input type="submit">
 </form>
 
 {%endfor%}
