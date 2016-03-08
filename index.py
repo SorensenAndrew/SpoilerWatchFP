@@ -14,7 +14,7 @@ from urllib2 import Request
 from json import load
 from lxml import html
 import requests
-import time
+import datetime
 
 app = Flask(__name__)
 app.secret_key = "4321"
@@ -60,7 +60,7 @@ def users():
     data = cursor.fetchall()
     return render_template('users.html',data=data)
 
-
+###### Display Shows #######################
 @app.route('/shows')
 def show():
     name = session["username"]
@@ -71,6 +71,7 @@ def show():
     return render_template('shows.html',showdata=showdata)
 
 
+###### Verify user login ######
 
 @app.route('/checklogin', methods=['post','get'])
 def checklogin():
@@ -87,6 +88,8 @@ def checklogin():
         return render_template('showSearch.html',data=data)
     else:
         return redirect('/login')
+
+#### Friends List and Management ########
 
 @app.route('/friendForm', methods=['post','get'])
 def friendForm():
@@ -120,6 +123,7 @@ def frienddata():
     data = cursor.fetchall()
     return render_template('friendData.html',data=data)
 
+######## User Registration ########
 
 @app.route('/newUser')
 def newUser():
@@ -197,7 +201,7 @@ def complaint():
 
 
 
-######################################################################################
+################### Add Show ###################################################################
 
 @app.route('/parseJSON',methods=['post', 'get'])
 def parseJSON():
@@ -234,23 +238,33 @@ def deleteshow():
     db.commit()
     return redirect('/shows')
 
+@app.route('/form')
+def form():
+    return render_template('form.html')
+
 #### Show Update ###########
 
 @app.route('/updateShow', methods=['post', 'get'])
 def updateshow():
     name = session["username"]
-    show = request.form["show"]
-    showTitle = request.form["title"]
-    showSeason = request.form["season"]
-    showEpisode = request.form["episode"]
+    title = request.form["title"]
+    season = request.form['season']
+    episode = request.form['episode']
+    url = "http://www.omdbapi.com/?t=" + title +"&Season="+ season + "&Episode=" + episode +"&r=json"
+    url = url.replace(" ","%20")
+    loadurl = urllib.urlopen(url)
+    data = json.loads(loadurl.read().decode(loadurl.info().getparam('charset') or 'utf-8'))
+    episodedata = data['Episode']
+    titledata = data['Title']
+    seasondata= data['Season']
     db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
     cursor = db.cursor()
-    cursor.execute("update showData set showTitle=%s, showSeason=%s, showEpisode=%s where showName='" + show + "' and username='" + name + "'", (showTitle, showSeason, showEpisode ))
+    cursor.execute("update showData set showTitle=%s, showSeason=%s, showEpisode=%s where showName='" + title + "' and username='" + name  + "'", (titledata, seasondata, episodedata))
     db.commit()
-    return redirect('/shows')
+    return render_template('profilePage.html',data=data)
 
 
-########################
+######### Logout ###############
 
 @app.route('/logout')
 def logout():
@@ -258,9 +272,9 @@ def logout():
     return redirect('/login')
 
 
-@app.route('/form')
-def form():
-    return render_template('form.html')
+
+############################
+
 
 
 @app.route('/formtest', methods=['post','get'])
@@ -270,16 +284,17 @@ def formtest():
     return hashed
 
 ################### HTML Scraping ###################################
-page = requests.get('http://econpy.pythonanywhere.com/ex/001.html')
-tree = html.fromstring(page.content)
+
+#page = requests.get('http://econpy.pythonanywhere.com/ex/001.html')
+#tree = html.fromstring(page.content)
 
 #This will create a list of buyers:
-buyers = tree.xpath('//div[@title="buyer-name"]/text()')
+#buyers = tree.xpath('//div[@title="buyer-name"]/text()')
 #This will create a list of prices
-prices = tree.xpath('//span[@class="item-price"]/text()')
+#prices = tree.xpath('//span[@class="item-price"]/text()')
 
-print 'Buyers: ', buyers
-print 'Prices: ', prices
+#print 'Buyers: ', buyers
+#print 'Prices: ', prices
 
 
 if __name__ == '__main__':

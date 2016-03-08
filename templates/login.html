@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.css">
     <script src="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.js"></script>
 </head>
-<body>
-    <div class="medium-12 columns">
-        <div class="medium-2 columns">
+<body style="background-color: #f4eade;">
+    <div class="large-12 columns">
+        <div class="medium-3 columns wrapper">
             <h2 class="header">Login</h2>
             <form action="/checklogin" method="post">
                 Username: <input type="text" name="username" style="margin:5px">
@@ -19,17 +19,17 @@
                 <br>
                 <input class="submit" type="submit" style="margin:5px">
             </form>
-            <h2 class="header">Not A User?</h2>
-            <a class="submit" href="/newUser">Sign Up!</a>
-        </div>
-        <div class="medium-6 columns">
-            <h2 class="header">What is Spoiler Watch</h2>
-            <p>Spoiler Watch is an app about stuff and things.</p>
+             <h2 class="header">Not A User?</h2>
+            <a style="font-size:25px" href="/newUser">Sign Up Now!</a>
+            </div>
+            <div class="medium-8 columns">
+            <h2 class="header">What is Spoiler Watch?</h2>
+            <p>Spoiler Watch is a site where you and your friends manage a list of shows that you follow, allowing you to see your own and others progress in a television series.</p>
         </div>
     </div>
-    <div class="medium-12 columns">
+    <div class="large-3 columns">
         <h2 class="header">Admin Login</h2>
-        <form action="/checkAdminLogin" method="post" class="medium-6 columns">
+        <form action="/checkAdminLogin" method="post">
             Username: <input type="text" name="adminUser" style="margin:5px">
             <br>
             Password: <input type="password" name="adminPassword" style="margin:5px">

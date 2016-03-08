@@ -1,9 +1,24 @@
-.columns{
+/* Base Styles */
+body{
     background-color: #f4eade;
+}
+
+.columns{
     font-family: 'Walkway Semibold'
 
 }
 
+
+
+
+/* ############################### */
+
+.wrapper{
+    background-color: whitesmoke;
+    border-radius: 25px;
+    padding:30px;
+    margin: 10px;
+}
 
 .bubble{
     background-color: whitesmoke;
