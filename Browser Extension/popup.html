@@ -10,16 +10,7 @@
 </head>
 
 <body onload="brython()">
-<script type="text/python">
-from browser import document as doc
-from browser import alert
-
-def echo(*args):
-    alert("Hello %s !" %doc["zone"].value)
-
-doc["test"].bind("click", echo)
-</script>
-<p>Your name is : <input id="zone"><button id="test">clic !</button>
+    <script type="text/python" src="webScraper.py"></script>
 </body>
 
 </html>

@@ -30,7 +30,7 @@ def navhome():
     name = session["username"]
     db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
     cursor = db.cursor()
-    cursor.execute("select * from showData where username!='"+ name + "'")
+    cursor.execute("select * from showData where username!='"+ name + "' order by dateAdded desc")
     showdata = cursor.fetchall()
     return render_template('userHome.html',showdata=showdata)
 

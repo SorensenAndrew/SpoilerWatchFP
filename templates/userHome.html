@@ -5,6 +5,7 @@
 {%for show in showdata|sort%}
 <form class="medium-6 columns bubble feed" action="/comment" method="post">
     <br>
+    <p style="margin-right:500px">{{show[5]}}</p>
     <h4 style="margin-top:10px;font-weight:bold;">{{show[0]}}</h4>
     <h5 style="margin-top:10px;font-weight:bold;">{{show[4]}}</h5>
     <h5 style="margin-top:10px;font-weight:bold;">"{{show[1]}}"</h5>
