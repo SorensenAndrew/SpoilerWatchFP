@@ -1,0 +1,56 @@
+/* Base Styles */
+body{
+    background-color: #f4eade;
+}
+
+.columns{
+    font-family: 'Walkway Semibold'
+
+}
+
+
+
+
+/* ############################### */
+
+.wrapper{
+    background-color: whitesmoke;
+    border-radius: 25px;
+    padding:30px;
+    margin: 10px;
+}
+
+.bubble{
+    background-color: whitesmoke;
+    border-radius: 25px;
+    padding:30px;
+    margin: 10px;
+    text-align: center;
+}
+
+.header, .nav{
+    color: #617799;
+    font-family: 'Keep Calm Medium';
+    margin: 15px;
+}
+
+.nav{
+    font-size: 1.5em;
+    margin: 8px;
+    border-bottom: 1px solid #617799;
+}
+
+.submit{
+    background-color: #617799;
+    color: whitesmoke;
+    padding: 4px;
+}
+
+.submit:hover{
+    background-color: black;
+    color: whitesmoke;
+
+}
+
+
+

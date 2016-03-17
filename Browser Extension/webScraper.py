@@ -17,7 +17,7 @@ def getInternallinks(bsObj, includeUrl):
                                       internallinks.append(link.attrs['href'])
     return internallinks
 
-#Gets externa links
+#Gets external links
 
 def getExternallinks(bsObj, url):
     excludeUrl = getDomain(url)
