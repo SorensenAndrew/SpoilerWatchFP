@@ -66,7 +66,7 @@ def show():
     name = session["username"]
     db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
     cursor = db.cursor()
-    cursor.execute("select showName, showTitle, showSeason, showEpisode from showData where username='"+ name+ "'")
+    cursor.execute("select showName, showTitle, showSeason, showEpisode,episodeCount from showData where username='"+ name+ "'")
     showdata = cursor.fetchall()
     return render_template('shows.html',showdata=showdata)
 
@@ -140,66 +140,6 @@ def addUser():
     db.commit()
     return redirect('/login')
 
-################## Admin SignUp/Login ##################################
-
-@app.route('/addAdmin',methods=['post', 'get'])
-def addAdmin():
-    aname = request.form['newAdmin']
-    apass = request.form['newAdminPassword']
-    db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
-    cursor = db.cursor()
-    cursor.execute("insert into admin(adminUser, password)values(%s,%s)", (aname, apass))
-    db.commit()
-    return redirect('/login')
-
-@app.route('/newAdmin')
-def newAdmin():
-    return render_template('addAdminAccess.html')
-
-@app.route('/adminCheck',methods=['post', 'get'])
-def adminCheck():
-    session["adminAccessPassword"] = request.form["adminAccessPassword"]
-    apass = request.form['adminAccessPassword']
-    db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
-    cursor = db.cursor()
-    cursor.execute("select * from adminPass", (session["adminAccessPassword"]))
-    data = cursor.fetchall()
-    if data:
-        data = {"adminAccessPassword":session["adminAccessPassword"]}
-        return render_template('adminReg.html',data=data)
-    else:
-        return redirect('/login')
-
-@app.route('/checkAdminLogin', methods=['post','get'])
-def checkAdminLogin():
-    session["adminUser"] = request.form["adminUser"]
-    session["adminPassword"] = request.form["adminPassword"]
-    db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
-    cursor = db.cursor()
-    hashval = hashlib.md5(request.form["adminPassword"]).hexdigest()
-
-    cursor.execute("select * from admin where adminUser=%s and password=%s", (session["adminUser"], session["adminPassword"]))
-    data = cursor.fetchall()
-    if data:
-        data = {"adminUser":session["adminUser"],"adminPassword":session["adminPassword"]}
-        return render_template('adminHome.html',data=data)
-    else:
-        return redirect('/login')
-
-###################### Complaint File ###############################################
-
-@app.route('/fileComplaint', methods=['post','get'])
-def complaint():
-    name = "testName"
-    complaint = request.form['complaint']
-    unchecked = 0
-    db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
-    cursor = db.cursor()
-    cursor.execute("insert into complaint(user, complaint, complete)values(%s,%s,%s)", (name, complaint, unchecked))
-    db.commit()
-    return redirect('/friends')
-
-
 
 ################### Add Show ###################################################################
 
@@ -209,18 +149,32 @@ def parseJSON():
     title = request.form["title"]
     season = request.form['season']
     episode = request.form['episode']
+
     url = "http://www.omdbapi.com/?t=" + title +"&Season="+ season + "&Episode=" + episode +"&r=json"
     url = url.replace(" ","%20")
     loadurl = urllib.urlopen(url)
     data = json.loads(loadurl.read().decode(loadurl.info().getparam('charset') or 'utf-8'))
+    url2 = "http://www.omdbapi.com/?t=" + title +"&Season="+ season +"&r=json"
+    url2 = url2.replace(" ","%20")
+    loadurl2 = urllib.urlopen(url2)
+    data2 = json.loads(loadurl2.read().decode(loadurl2.info().getparam('charset') or 'utf-8'))
+    # print data2['Episodes']
+    episodeCount = []
+    episodeCount.append(data2['Episodes'])
+    for i in range(len(episodeCount)):
+        print len(episodeCount[i])
+    totalEpisodes = len(episodeCount[i])
     episodedata = data['Episode']
     titledata = data['Title']
     seasondata= data['Season']
     db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
     cursor = db.cursor()
-    cursor.execute("insert into showData(username, showTitle, showSeason, showEpisode, showName)values(%s,%s,%s,%s,%s)", (name, titledata, seasondata, episodedata, title))
+    cursor.execute("insert into showData(username, showTitle, showSeason, showEpisode, showName, episodeCount)values(%s,%s,%s,%s,%s, %s)", (name, titledata, seasondata, episodedata, title, totalEpisodes))
+    cursor2 = db.cursor()
+    cursor2.execute("select showEpisode, episodeCount from showData where showName='" + title + "'")
+    new_count = cursor2.fetchall()
     db.commit()
-    return render_template('profilePage.html',data=data)
+    return render_template('profilePage.html',data=data,newVar=new_count)
 
 
 @app.route('/showSearch')
@@ -241,6 +195,20 @@ def deleteshow():
 @app.route('/form')
 def form():
     return render_template('form.html')
+
+### Javascript Fetch Data ####
+
+@app.route('/dataRoute', methods=['get'])
+def dataRoute():
+    name = session["username"]
+    db2 = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
+    cursor2 = db2.cursor2()
+    cursor2.execute("select showName, showEpisode, episodeCount from showData where username='" + name + "'")
+    newVar = cursor2.fetchall()
+    print newVar
+    return  render_template('shows.html')
+
+# where username='" + name + "' and showName='" + showName + "'" #
 
 #### Show Update ###########
 
@@ -283,18 +251,6 @@ def formtest():
     hashed = hashlib.md5(userinput).hexdigest()
     return hashed
 
-################### HTML Scraping ###################################
-
-#page = requests.get('http://econpy.pythonanywhere.com/ex/001.html')
-#tree = html.fromstring(page.content)
-
-#This will create a list of buyers:
-#buyers = tree.xpath('//div[@title="buyer-name"]/text()')
-#This will create a list of prices
-#prices = tree.xpath('//span[@class="item-price"]/text()')
-
-#print 'Buyers: ', buyers
-#print 'Prices: ', prices
 
 
 if __name__ == '__main__':
