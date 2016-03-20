@@ -16,6 +16,7 @@ from lxml import html
 import requests
 import datetime
 
+
 app = Flask(__name__)
 app.secret_key = "4321"
 
@@ -69,6 +70,27 @@ def show():
     cursor.execute("select showName, showTitle, showSeason, showEpisode,episodeCount from showData where username='"+ name+ "'")
     showdata = cursor.fetchall()
     return render_template('shows.html',showdata=showdata)
+
+
+#### Show Progress and Badges ####
+
+@app.route('/badges', methods=['post','get'])
+def badgePage():
+    name = session["username"]
+    showName = request.form['showName']
+    season = request.form['season']
+    currentEpisode = request.form['currentEpisode']
+    lastEpisode = request.form['lastEpisode']
+    db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
+    cursor = db.cursor()
+    cursor.execute("select showName, showTitle, showSeason, showEpisode,episodeCount from showData where showName='" + showName + "' and username='" + name + "'")
+    showdata = cursor.fetchall()
+    # if currentEpisode == lastEpisode:
+    #     db2 = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
+    #     cursor2 = db2.cursor()
+    #     cursor2.execute("insert into badges(username, showTitle, showSeason, showEpisode, showName, episodeCount)values(%s,%s,%s,%s,%s, %s)", (name, titledata, seasondata, episodedata, title, totalEpisodes))
+    #     showdata = cursor.fetchall()
+    return render_template('badges.html',showdata=showdata)
 
 
 ###### Verify user login ######
