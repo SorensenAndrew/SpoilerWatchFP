@@ -60,4 +60,12 @@
 {%endfor%}
 
 <h3>Show Badges</h3>
-<div class="row"></div>
+{%for badge in badgeData %}
+<div class="badge"><p class="badgeText">{{badge[1]}}</p></div>
+
+
+
+{%endfor%}
+
+
+

@@ -85,12 +85,16 @@ def badgePage():
     cursor = db.cursor()
     cursor.execute("select showName, showTitle, showSeason, showEpisode,episodeCount from showData where showName='" + showName + "' and username='" + name + "'")
     showdata = cursor.fetchall()
-    # if currentEpisode == lastEpisode:
-    #     db2 = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
-    #     cursor2 = db2.cursor()
-    #     cursor2.execute("insert into badges(username, showTitle, showSeason, showEpisode, showName, episodeCount)values(%s,%s,%s,%s,%s, %s)", (name, titledata, seasondata, episodedata, title, totalEpisodes))
-    #     showdata = cursor.fetchall()
-    return render_template('badges.html',showdata=showdata)
+    badgeCursor = db.cursor()
+    badgeCursor.execute("select showName, badges from badges where showName='" + showName + "' and username='" + name + "'")
+    badgeData = badgeCursor.fetchall()
+    if currentEpisode == lastEpisode:
+        badge = "You have completed season '" + season + "' of '"+ showName+ "'"
+        db2 = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
+        cursor2 = db2.cursor()
+        cursor2.execute("insert into badges(username, showSeason, showName, badges)values(%s,%s,%s,%s)", (name, season, showName, badge))
+        db2.commit()
+    return render_template('badges.html',showdata=showdata, badgeData = badgeData)
 
 
 ###### Verify user login ######
@@ -250,8 +254,11 @@ def updateshow():
     db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
     cursor = db.cursor()
     cursor.execute("update showData set showTitle=%s, showSeason=%s, showEpisode=%s where showName='" + title + "' and username='" + name  + "'", (titledata, seasondata, episodedata))
+    cursor2 = db.cursor()
+    cursor2.execute("select showEpisode, episodeCount from showData where showName='" + title + "'")
+    new_count = cursor2.fetchall()
     db.commit()
-    return render_template('profilePage.html',data=data)
+    return render_template('profilePage.html',data=data, newVar=new_count)
 
 
 ######### Logout ###############

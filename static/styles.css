@@ -131,6 +131,21 @@ h4{
   background-color: #617799;
 }
 
+.badge{
+  background-color: black;
+  height: 150px;
+  width: 150px
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+  overflow: none;
+}
+
+.badgeText{
+  margin: 5px;
+  padding: 35px;
+}
+
 /* .nav{
     color: white;
     font-family: 'Keep Calm Medium';
@@ -171,4 +186,6 @@ h4{
     color: whitesmoke;
 
 }
+
+
 
