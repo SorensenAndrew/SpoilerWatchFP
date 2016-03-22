@@ -78,9 +78,6 @@ def show():
 def badgePage():
     name = session["username"]
     showName = request.form['showName']
-    season = request.form['season']
-    currentEpisode = request.form['currentEpisode']
-    lastEpisode = request.form['lastEpisode']
     db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
     cursor = db.cursor()
     cursor.execute("select showName, showTitle, showSeason, showEpisode,episodeCount from showData where showName='" + showName + "' and username='" + name + "'")
@@ -88,12 +85,6 @@ def badgePage():
     badgeCursor = db.cursor()
     badgeCursor.execute("select showName, badges from badges where showName='" + showName + "' and username='" + name + "'")
     badgeData = badgeCursor.fetchall()
-    if currentEpisode == lastEpisode:
-        badge = "You have completed season '" + season + "' of '"+ showName+ "'"
-        db2 = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
-        cursor2 = db2.cursor()
-        cursor2.execute("insert into badges(username, showSeason, showName, badges)values(%s,%s,%s,%s)", (name, season, showName, badge))
-        db2.commit()
     return render_template('badges.html',showdata=showdata, badgeData = badgeData)
 
 
@@ -171,11 +162,10 @@ def addUser():
 
 @app.route('/parseJSON',methods=['post', 'get'])
 def parseJSON():
-    name = session["username"]
-    title = request.form["title"]
+    name = session["username"].title()
+    title = request.form["title"].title()
     season = request.form['season']
     episode = request.form['episode']
-
     url = "http://www.omdbapi.com/?t=" + title +"&Season="+ season + "&Episode=" + episode +"&r=json"
     url = url.replace(" ","%20")
     loadurl = urllib.urlopen(url)
@@ -193,12 +183,18 @@ def parseJSON():
     episodedata = data['Episode']
     titledata = data['Title']
     seasondata= data['Season']
+    tE = int(totalEpisodes)
+    eD = int(episodedata)
     db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
     cursor = db.cursor()
     cursor.execute("insert into showData(username, showTitle, showSeason, showEpisode, showName, episodeCount)values(%s,%s,%s,%s,%s, %s)", (name, titledata, seasondata, episodedata, title, totalEpisodes))
     cursor2 = db.cursor()
     cursor2.execute("select showEpisode, episodeCount from showData where showName='" + title + "'")
     new_count = cursor2.fetchall()
+    if eD == tE:
+        badge = "You have completed season '" + season + "' of '" + title + "'"
+        cursor3 = db.cursor()
+        cursor3.execute("insert into badges(username, showSeason, showName, badges)values(%s,%s,%s,%s)", (name, season, title, badge))
     db.commit()
     return render_template('profilePage.html',data=data,newVar=new_count)
 
@@ -249,6 +245,7 @@ def updateshow():
     loadurl = urllib.urlopen(url)
     data = json.loads(loadurl.read().decode(loadurl.info().getparam('charset') or 'utf-8'))
     episodedata = data['Episode']
+    eD = int(episodedata)
     titledata = data['Title']
     seasondata= data['Season']
     db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
@@ -257,6 +254,14 @@ def updateshow():
     cursor2 = db.cursor()
     cursor2.execute("select showEpisode, episodeCount from showData where showName='" + title + "'")
     new_count = cursor2.fetchall()
+    cursor3 = db.cursor()
+    cursor3.execute("select episodeCount from showData where showName='" + title + "'")
+    testvar = cursor3.fetchone()
+    tE = testvar[0]
+    if eD == tE:
+        badge = "You have completed season '" + season + "' of '" + title + "'"
+        cursor3 = db.cursor()
+        cursor3.execute("insert into badges(username, showSeason, showName, badges)values(%s,%s,%s,%s)", (name, season, title, badge))
     db.commit()
     return render_template('profilePage.html',data=data, newVar=new_count)
 

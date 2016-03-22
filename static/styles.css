@@ -95,22 +95,67 @@ Add media queries:
     border-radius: 6px;
     padding:30px;
     margin: 10px;
-    height: 500px;
+    height: 45%;
+    width: 35%;
+}
+
+.showContent{
+    text-align:center;
+}
+
+.friendBubble{
+    background-color: #c7c7c7;
+    border-radius: 6px;
+    padding:30px;
+    margin: 10px;
+    height: 25%;
+}
+
+.friendShow{
+    background-color: #c7c7c7;
+    border-radius: 6px;
+    padding:30px;
+    margin: 10px;
+    height: 35%;
+    width: 55%;
+    float: left;
+    text-align: center;
+}
+
+.badgeForm{
+    background-color: #c7c7c7;
+    border-radius: 6px;
+    padding:30px;
+    margin: 10px;
+    height: 70%;
+    width: 35%;
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Keep Calm Medium';
+
 }
 
 .header{
     color: #617799;
     font-family: 'Keep Calm Medium';
-    margin: 15px;
+    margin: 2%;
 }
 
-h5{
-    text-align: center;
-    font-weight: 200;
+.feed{
+    background-color: #c7c7c7;
+    border-radius: 6px;
+    padding:30px;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 10px;
+    height: 20%;
+    width: 50%;
 }
-p{
-  margin:1px;
-  text-align: center;
+
+
 
 }
 h4{
@@ -133,26 +178,26 @@ h4{
 
 .badge{
   background-color: black;
-  height: 150px;
-  width: 150px
-  font-weight: bold;
-  font-size: 15px;
-  text-align: center;
-  overflow: none;
+  width: 200px;
+  height: 200px;
+  -moz-border-radius: 100px;
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
 }
 
 .badgeText{
   margin: 5px;
   padding: 35px;
+  font-size: 15px;
 }
 
-/* .nav{
-    color: white;
-    font-family: 'Keep Calm Medium';
-    background-color:  #617799;
-    font-size: 1.5em;
-    padding: 5px;
-} */
+#update{
+  width:15%;
+  padding:0px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+
+}
 
 
 /* restyling the container */

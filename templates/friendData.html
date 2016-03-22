@@ -2,11 +2,11 @@
 <h3 class="header">Last Episodes Watched:</h3>
 {%for show in data%}
 <br>
-<div class="medium-4 columns bubble">
-    <h4 style="margin-top:10px;font-weight:bold;">{{show[0]}}</h4>
-    <h5 style="margin-top:10px;font-weight:bold;">"{{show[1]}}"</h5>
-    <p style="margin-top:10px;font-weight:bold;">Season:{{show[2]}}</p>
-    <p style="margin-top:10px;font-weight:bold;">Episode:{{show[3]}}</p>
+<div class="medium-4 columns friendShow">
+    <h4>{{show[0]}}</h4>
+    <h5>"{{show[1]}}"</h5>
+    <p>Season:{{show[2]}}</p>
+    <p>Episode:{{show[3]}}</p>
 </div>
 {%endfor%}
 
