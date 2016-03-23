@@ -167,7 +167,11 @@ def addUser():
     upass = request.form['newPassword']
     db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
     cursor = db.cursor()
-    cursor.execute("insert into users(username, password)values(%s,%s)", (uname, upass))
+    cursor.execute("select username from users")
+    users = cursor.fetchall()
+    print users
+    cursor2 = db.cursor()
+    cursor2.execute("insert into users(username, password)values(%s,%s)", (uname, upass))
     db.commit()
     return redirect('/login')
 
@@ -286,11 +290,13 @@ def updateshow():
     eD = int(episodedata)
     titledata = data['Title']
     seasondata= data['Season']
+    plotdata = data['Plot']
+    airdatedata = data['Released']
     db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
     cursor = db.cursor()
-    cursor.execute("update showData set showTitle=%s, showSeason=%s, showEpisode=%s where showName='" + title + "' and username='" + name  + "'", (titledata, seasondata, episodedata))
+    cursor.execute("update showData set showTitle=%s, showSeason=%s, showEpisode=%s, plot=%s, airDate=%s where showName='" + title + "' and username='" + name  + "'", (titledata, seasondata, episodedata, plotdata, airdatedata ))
     cursor2 = db.cursor()
-    cursor2.execute("select showEpisode, episodeCount from showData where showName='" + title + "'")
+    cursor2.execute("select showEpisode, episodeCount, plot, airDate from showData where showName='" + title + "'")
     new_count = cursor2.fetchall()
     cursor3 = db.cursor()
     cursor3.execute("select episodeCount from showData where showName='" + title + "'")
