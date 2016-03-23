@@ -244,4 +244,78 @@ h4{
 }
 
 
+/* Media Queries */
 
+/* Phone */
+@media screen and (min-width: 320px) and (max-width: 577px) {
+    body{
+        background-color: lightgreen;
+    }
+
+    .bubble {
+        width: 85%;
+    }
+
+    #update{
+        width: 35%;
+    }
+
+    #searchSubmit{
+        width: 35%;
+    }
+
+    .badgeForm{
+        height: 100%;
+    }
+
+    #sw{
+        display:none;
+    }
+
+    .friendShow{
+        width: 95%;
+    }
+
+    #findFriendInput{
+        width: 485%;
+    }
+
+    #seeFriendShows{
+        width: 45%;
+    }
+
+    .friendBubble{
+        width: 85%;
+    }
+
+    #addFriendButton{
+        width: 485%;
+    }
+
+}
+
+
+/* Tablet */
+@media screen and (min-width: 578px) and (max-width: 1105px)  {
+    body{
+        background-color: lightblue;
+    }
+
+    .bubble {
+        width: 85%;
+    }
+
+    .badgeForm{
+        height: 95%;
+    }
+
+    #sw{
+        display:none;
+    }
+
+    .friendShow{
+        width: 85%;
+        margin-left: 8%;
+    }
+
+}
