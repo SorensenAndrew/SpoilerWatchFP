@@ -21,6 +21,15 @@ nav{
     width: 100%;
 }
 
+.footer{
+    margin: 0px;
+    margin-top: 25px;
+    width: 100%;
+    height: 75px;
+    background-color: #617799;
+
+}
+
 /* Float the list items side by side */
 ul.topnav li {float: left;}
 
@@ -127,8 +136,8 @@ Add media queries:
     border-radius: 6px;
     padding:30px;
     margin: 10px;
-    height: 70%;
-    width: 35%;
+    height: 90%;
+    width: 98%;
 }
 
 
@@ -177,12 +186,14 @@ h4{
 }
 
 .badge{
+  margin: 15px;
   background-color: black;
   width: 200px;
   height: 200px;
   -moz-border-radius: 100px;
   -webkit-border-radius: 100px;
   border-radius: 100px;
+  float: left;
 }
 
 .badgeText{

@@ -22,18 +22,17 @@
 
     </script>
 
-
-
-
-
-  <form class="medium-3 columns badgeForm" action="deleteShow" method="post">
+  <form class="medium-12 columns badgeForm" action="deleteShow" method="post">
     <br>
     <h4 class="showContent">{{show[0]}}</h4>
     <h5 class="showContent">"{{show[1]}}"</h5>
     <p class="showContent" id="seasonTitle">Season: {{show[2]}}</p>
     <p class="showContent">Episode: {{show[3]}}</p>
     <p class="showContent">Max Ep: {{show[4]}}</p>
+    <p>Plot Summary: {{show[5]}}</p>
+    <p>Air Date: {{show[6]}}</p>
 
+    <h5>Progress in Season:</h5>
     <div class="radial-progress" data-progress="0">
 	<div class="circle">
 		<div class="mask full">
@@ -61,11 +60,13 @@
 
 <h3>Badges</h3>
 {%for badge in badgeData %}
-<div class="badge"><p class="badgeText">{{badge[1]}}</p></div>
+<div class="medium-12 columns badge"><p class="badgeText">{{badge[1]}}</p></div>
 
 
 
 {%endfor%}
+
+
 
 
 

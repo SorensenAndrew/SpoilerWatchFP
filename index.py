@@ -80,7 +80,7 @@ def badgePage():
     showName = request.form['showName']
     db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
     cursor = db.cursor()
-    cursor.execute("select showName, showTitle, showSeason, showEpisode,episodeCount from showData where showName='" + showName + "' and username='" + name + "'")
+    cursor.execute("select showName, showTitle, showSeason, showEpisode,episodeCount, plot, airDate from showData where showName='" + showName + "' and username='" + name + "'")
     showdata = cursor.fetchall()
     badgeCursor = db.cursor()
     badgeCursor.execute("select showName, badges from badges where showName='" + showName + "' and username='" + name + "'")
@@ -174,7 +174,6 @@ def parseJSON():
     url2 = url2.replace(" ","%20")
     loadurl2 = urllib.urlopen(url2)
     data2 = json.loads(loadurl2.read().decode(loadurl2.info().getparam('charset') or 'utf-8'))
-    # print data2['Episodes']
     episodeCount = []
     episodeCount.append(data2['Episodes'])
     for i in range(len(episodeCount)):
@@ -183,11 +182,13 @@ def parseJSON():
     episodedata = data['Episode']
     titledata = data['Title']
     seasondata= data['Season']
+    plotData = data['Plot']
+    airDate = data['Released']
     tE = int(totalEpisodes)
     eD = int(episodedata)
     db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
     cursor = db.cursor()
-    cursor.execute("insert into showData(username, showTitle, showSeason, showEpisode, showName, episodeCount)values(%s,%s,%s,%s,%s, %s)", (name, titledata, seasondata, episodedata, title, totalEpisodes))
+    cursor.execute("insert into showData(username, showTitle, showSeason, showEpisode, showName, episodeCount, plot, airDate)values(%s,%s,%s,%s,%s, %s, %s, %s)", (name, titledata, seasondata, episodedata, title, totalEpisodes, plotData, airDate))
     cursor2 = db.cursor()
     cursor2.execute("select showEpisode, episodeCount from showData where showName='" + title + "'")
     new_count = cursor2.fetchall()
