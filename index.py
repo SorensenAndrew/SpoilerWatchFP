@@ -210,6 +210,29 @@ def parseJSON():
         badge = "You have completed season '" + season + "' of '" + title + "'"
         cursor3 = db.cursor()
         cursor3.execute("insert into badges(username, showSeason, showName, badges)values(%s,%s,%s,%s)", (name, season, title, badge))
+    cursor4 = db.cursor()
+    cursor4.execute("select showName from showData where username='" + name + "'")
+    totalShowsFollowed = cursor4.fetchall()
+    if len(totalShowsFollowed) == 5:
+        showNumberBadge = "Following 5 Shows!"
+        cursor5 = db.cursor()
+        cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, showNumberBadge))
+    elif len(totalShowsFollowed) == 10:
+        showNumberBadge = "Following 10 Shows!"
+        cursor5 = db.cursor()
+        cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, showNumberBadge))
+    elif len(totalShowsFollowed) == 15:
+        showNumberBadge = "Following 15 Shows!"
+        cursor5 = db.cursor()
+        cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, showNumberBadge))
+    elif len(totalShowsFollowed) == 20:
+        showNumberBadge = "Following 20 Shows!"
+        cursor5 = db.cursor()
+        cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, showNumberBadge))
+    elif len(totalShowsFollowed) == 25:
+        showNumberBadge = "Following 25 Shows!"
+        cursor5 = db.cursor()
+        cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, showNumberBadge))
     db.commit()
     return render_template('profilePage.html',data=data,newVar=new_count)
 
