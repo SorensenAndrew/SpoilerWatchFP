@@ -88,6 +88,20 @@ def badgePage():
     return render_template('badges.html',showdata=showdata, badgeData = badgeData)
 
 
+### Show All Badges Page #####
+
+@app.route('/allBadges', methods=['get'])
+def allBadges():
+    name = session["username"]
+    db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
+    badgeCursor = db.cursor()
+    badgeCursor.execute("select badges from badges where username='" + name + "'")
+    badgeData = badgeCursor.fetchall()
+    return render_template('allBadges.html', badgeData = badgeData)
+
+
+
+
 ###### Verify user login ######
 
 @app.route('/checklogin', methods=['post','get'])
