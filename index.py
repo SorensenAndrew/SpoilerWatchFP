@@ -161,7 +161,10 @@ def frienddata():
     cursor = db.cursor()
     cursor.execute("select showName, showTitle, showSeason, showEpisode from showData where username='" + friendname + "'")
     data = cursor.fetchall()
-    return render_template('friendData.html',data=data)
+    badgeCursor = db.cursor()
+    badgeCursor.execute("select badges from badges where username='" + friendname + "'")
+    badgeData = badgeCursor.fetchall()
+    return render_template('friendData.html',data=data, badgeData=badgeData)
 
 @app.route('/deleteFriends', methods=['post', 'get'])
 def deletefriend():

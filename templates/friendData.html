@@ -1,8 +1,9 @@
 {%include 'nav.html'%}
-<h3 class="header">Last Episodes Watched:</h3>
+<h3 class="medium-5 columns header">Last Episodes Watched:</h3>
+<h3 class="medium-5 columns header">All Badges</h3>
 {%for show in data%}
 <br>
-<div class="medium-4 columns friendShow">
+<div class="medium-5 columns friendShow">
     <h4>{{show[0]}}</h4>
     <h5>"{{show[1]}}"</h5>
     <p>Season:{{show[2]}}</p>
@@ -10,3 +11,12 @@
 </div>
 {%endfor%}
 
+
+
+{%for badge in badgeData %}
+<div class="medium-5 columns badge"><p class="badgeText">{{badge[0]}}</p></div>
+
+
+
+
+{%endfor%}
