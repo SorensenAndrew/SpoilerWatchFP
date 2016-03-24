@@ -5,11 +5,10 @@
 @include top-bar-unstack;
 
 
-
 body#dummybodyid {
     padding: 0px;
 }
-/* Remove margins and padding from the list, and add a black background color */
+
 ul.topnav {
     list-style-type: none;
     margin: 0;
@@ -30,10 +29,8 @@ nav{
 
 }
 
-/* Float the list items side by side */
 ul.topnav li {float: left;}
 
-/* Style the links inside the list items */
 ul.topnav li a {
     display: inline-block;
     color: #f2f2f2;
@@ -44,44 +41,6 @@ ul.topnav li a {
     transition: 0.3s;
     font-size: 17px;
 }
-/* Change background color of links on hover */
-ul.topnav li a:hover {background-color: #343f51;}
-
-/* Hide the list item that contains the link that should open and close the topnav on small screens */
-ul.topnav li.icon {display: none;}
-
-/* Hide the list item that contains the link that should open and close the topnav on small screens */
-ul.topnav li.icon {display: none;}
-Add media queries:
-
-/* When the screen is less than 680 pixels wide, hide all list items, except for the first one ("Home"). Show the list item that contains the link to open and close the topnav (li.icon) */
-@media screen and (max-width:680px) {
-  ul.topnav li:not(:first-child) {display: none;}
-  ul.topnav li.icon {
-    float: right;
-    display: inline-block;
-  }
-}
-
-/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens */
-@media screen and (max-width:680px) {
-  ul.topnav.responsive {position: relative;}
-  ul.topnav.responsive li.icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  ul.topnav.responsive li {
-    float: none;
-    display: inline;
-  }
-  ul.topnav.responsive li a {
-    display: block;
-    text-align: left;
-  }
-}
-
-
 
 
 .columns{
@@ -110,6 +69,13 @@ Add media queries:
 
 .showContent{
     text-align:center;
+
+}
+
+#showAdded{
+    background-color: #c7c7c7;
+    font-size: 25px;
+
 }
 
 .friendBubble{
@@ -185,20 +151,45 @@ h4{
   background-color: #617799;
 }
 
-.badge{
-  margin: 15px;
-  background-color: black;
-  width: 200px;
-  height: 200px;
-  -moz-border-radius: 100px;
-  -webkit-border-radius: 100px;
-  border-radius: 100px;
-  float: left;
+
+.badge {
+ margin: 10px;
+ position: relative;
+ background: #ffa600;
+ height: 180px;
+ width: 180px;
+ -moz-border-radius:    120px;
+ -webkit-border-radius: 120px;
+ border-radius:         120px;
+}
+
+.badge:before,
+.badge:after {
+  content: '';
+  position: absolute;
+  border-bottom: 140px solid #ffa600;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  top: 140px;
+  left: -10px;
+  -webkit-transform: rotate(-140deg);
+  -moz-transform:    rotate(-140deg);
+  -ms-transform:     rotate(-140deg);
+  -o-transform:      rotate(-140deg);
+}
+
+.badge:after {
+  left: auto;
+  right: -10px;
+  -webkit-transform: rotate(140deg);
+  -moz-transform:    rotate(140deg);
+  -ms-transform:     rotate(140deg);
+  -o-transform:      rotate(140deg);
 }
 
 .badgeText{
-  margin: 5px;
-  padding: 35px;
+  color: black;
+  padding: 25px;
   font-size: 15px;
 }
 
@@ -220,6 +211,7 @@ h4{
 .alignContainer{
   margin-left:120px;
 }
+
 /* fixing foundation last item arrangement to column */
 
 .column:last-child:not(:first-child), .columns:last-child:not(:first-child) {
@@ -248,10 +240,6 @@ h4{
 
 /* Phone */
 @media screen and (min-width: 320px) and (max-width: 577px) {
-    body{
-        background-color: lightgreen;
-    }
-
     .bubble {
         width: 85%;
     }
@@ -297,10 +285,6 @@ h4{
 
 /* Tablet */
 @media screen and (min-width: 578px) and (max-width: 1105px)  {
-    body{
-        background-color: lightblue;
-    }
-
     .bubble {
         width: 85%;
     }
@@ -319,3 +303,36 @@ h4{
     }
 
 }
+
+ul.topnav li a:hover {background-color: #343f51;}
+
+ul.topnav li.icon {display: none;}
+
+ul.topnav li.icon {display: none;}
+Add media queries:
+
+@media screen and (max-width:680px) {
+  ul.topnav li:not(:first-child) {display: none;}
+  ul.topnav li.icon {
+    float: right;
+    display: inline-block;
+  }
+}
+
+@media screen and (max-width:680px) {
+  ul.topnav.responsive {position: relative;}
+  ul.topnav.responsive li.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  ul.topnav.responsive li {
+    float: none;
+    display: inline;
+  }
+  ul.topnav.responsive li a {
+    display: block;
+    text-align: left;
+  }
+}
+
