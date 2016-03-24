@@ -3,6 +3,7 @@ from flask import redirect
 from flask import request
 from flask import render_template
 from flask import session
+from collections import OrderedDict
 from flask import jsonify
 import urllib
 import json
@@ -14,7 +15,6 @@ from urllib2 import Request
 from json import load
 from lxml import html
 import requests
-import datetime
 
 
 app = Flask(__name__)
@@ -145,6 +145,15 @@ def friends():
     data = cursor.fetchall()
     return render_template('friends.html',data=data)
 
+@app.route('/manageFriends', methods=['post', 'get'])
+def friendmanager():
+    name = session["username"]
+    db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
+    cursor = db.cursor()
+    cursor.execute("select username1, username2 from friends where username1='"+ name+ "'")
+    data = cursor.fetchall()
+    return render_template('manageFriends.html',data=data)
+
 @app.route('/friendData',methods=['post', 'get'])
 def frienddata():
     friendname = request.form['friend']
@@ -153,6 +162,17 @@ def frienddata():
     cursor.execute("select showName, showTitle, showSeason, showEpisode from showData where username='" + friendname + "'")
     data = cursor.fetchall()
     return render_template('friendData.html',data=data)
+
+@app.route('/deleteFriends', methods=['post', 'get'])
+def deletefriend():
+    name = session["username"]
+    friendname = request.form['friend']
+    db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
+    cursor = db.cursor()
+    cursor.execute("delete from friends where username2='" + friendname + "' and username1='"+ name+ "'")
+    db.commit()
+    return render_template('deleteConf.html')
+
 
 ######## User Registration ########
 

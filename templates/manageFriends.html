@@ -1,0 +1,13 @@
+{%include 'nav.html'%}
+<h3 class="header">Delete Friends</h3>
+
+{%for data in data%}
+<form class="friendBubble medium-2 columns" action="/deleteFriends" method="post">
+    <br>
+    <p>{{data[1]}}</p>
+    <br>
+    <input class="submit" id="seeFriendShows"  type="submit" value="Delete">
+    <input name="friend" style="display:none;" value="{{data[1]}}">
+    <br>
+</form>
+{%endfor%}
