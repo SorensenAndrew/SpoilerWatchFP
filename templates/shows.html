@@ -1,13 +1,16 @@
 {%include 'nav.html'%}
 
+<h3 class="header">Update Shows</h3>
 
-<form class="medium-12 columns" action="/updateShow" method="post">
-    <h3 class="header">Update Shows</h3>
-    <input placeholder="Show Title" name="title">
-    <input placeholder="Season Number" name="season">
-    <input placeholder="Episode Number" name="episode">
+<form class="medium-12 columns updateShowForm" action="/updateShow" method="post">
+    <h4>Show Title:</h4>
+    <input name="title">
+    <h4>Season:</h4>
+    <input name="season">
+    <h4>Episode #:</h4>
+    <input name="episode">
     <br>
-    <input id="update" class="submit" type="submit" value="Update Show">
+    <input id="update" class="submit" type="submit" value="Submit">
 
 </form>
 

@@ -35,14 +35,6 @@ def navhome():
     showdata = cursor.fetchall()
     return render_template('userHome.html',showdata=showdata)
 
-@app.route('/comment', methods=['post','get'])
-def comment():
-    comment = request.form["comment"]
-    db = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
-    cursor = db.cursor()
-    cursor.execute("insert into comments(comment)values(%s)", (comment))
-    render_template('userHome.html')
-
 
 ###########################
 
@@ -50,8 +42,6 @@ def comment():
 @app.route('/login', methods=['post','get'])
 def login():
     return render_template('login.html')
-
-
 
 @app.route('/users')
 def users():
@@ -71,7 +61,6 @@ def show():
     showdata = cursor.fetchall()
     return render_template('shows.html',showdata=showdata)
 
-
 #### Show Progress and Badges ####
 
 @app.route('/badges', methods=['post','get'])
@@ -87,7 +76,6 @@ def badgePage():
     badgeData = badgeCursor.fetchall()
     return render_template('badges.html',showdata=showdata, badgeData = badgeData)
 
-
 ### Show All Badges Page #####
 
 @app.route('/allBadges', methods=['get'])
@@ -98,9 +86,6 @@ def allBadges():
     badgeCursor.execute("select badges from badges where username='" + name + "'")
     badgeData = badgeCursor.fetchall()
     return render_template('allBadges.html', badgeData = badgeData)
-
-
-
 
 ###### Verify user login ######
 
@@ -340,17 +325,27 @@ def logout():
     session.clear()
     return redirect('/login')
 
-
-
 ############################
-
-
 
 @app.route('/formtest', methods=['post','get'])
 def formtest():
     userinput = request.form["user"]
     hashed = hashlib.md5(userinput).hexdigest()
     return hashed
+
+######################################## MOVIE SECTIONS ###################################################
+
+@app.route('/movieToggle')
+def movieToggle():
+    return render_template('moviesHome.html')
+
+@app.route('/movies')
+def movies():
+    return render_template('movies.html')
+
+@app.route('/addMovies')
+def addMovies():
+    return render_template('addMovies.html')
 
 
 

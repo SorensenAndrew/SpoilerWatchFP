@@ -5,6 +5,10 @@
 @include top-bar-unstack;
 
 
+body{
+    background-color: whitesmoke;
+}
+
 body#dummybodyid {
     padding: 0px;
 }
@@ -16,7 +20,7 @@ ul.topnav {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #617799;
+    background-color: #242424;
 }
 nav{
     width: 100%;
@@ -126,7 +130,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header{
-    color: #617799;
+    color: #242424;
     font-family: 'Keep Calm Medium';
     margin: 2%;
 }
@@ -205,36 +209,14 @@ h4{
   font-size: 15px;
 }
 
-
-/* Add Shows Form */
-
-.addShow{
-    margin-left: 5%;
-}
-
-.addInput{
-    margin-left: 10%;
-}
-
-#searchSubmit{
-        width: 45%;
-        margin-left: 10%;
-        margin-top: 5%;
-    }
-
-/* Update Shows Form */
-
-.updateShowForm{
-    margin-left: 5%;
-}
-
 #update{
-  width:7%;
+  width:15%;
   padding:0px;
   margin-top: 10px;
   margin-bottom: 25px;
 
 }
+
 
 /* restyling the container */
 .medium-3 {

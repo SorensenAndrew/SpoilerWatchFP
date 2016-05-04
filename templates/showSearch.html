@@ -1,10 +1,13 @@
 {%include 'nav.html'%}
 <h3 class="header">Add A Show</h3>
-<form class="medium-2 columns" action="/parseJSON" method="post">
-    <input placeholder="Show Title" name="title">
-    <input placeholder="Season" name="season">
-    <input placeholder="Episode" name="episode">
+<form class="medium-2 columns addShow" action="/parseJSON" method="post">
+    <h4>Show Title:</h4>
+    <input class="addInput" name="title">
+    <h4>Season:</h4>
+    <input class="addInput" name="season">
+    <h4>Episode #:</h4>
+    <input class="addInput" name="episode">
     <br>
-    <input id="searchSubmit" class="submit" type="submit" style="margin:15px" value="Add Show">
+    <input id="searchSubmit" class="submit" type="submit" value="Submit">
 </form>
 

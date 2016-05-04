@@ -1,0 +1,16 @@
+{%include 'movieNav.html'%}
+<body>
+<div>
+<h3 class="header">News Feed</h3>
+{%for show in showdata|sort %}
+<form class="medium-6 columns feed" action="/comment" method="post">
+    <br>
+    <p class="showContent" style="margin-right:500px">{{show[5]}}</p>
+    <h4 class="showContent" style="margin-top:10px;font-weight:bold;">{{show[0]}}</h4>
+    <h5 class="showContent" style="margin-top:10px;font-weight:bold;">{{show[4]}}</h5>
+    <h5 class="showContent" style="margin-top:10px;font-weight:bold;">"{{show[1]}}"</h5>
+    <p class="showContent" style="margin-top:10px;font-weight:bold;">Season: {{show[2]}}</p>
+    <p class="showContent" style="margin-top:10px;font-weight:bold;">Episode: {{show[3]}}</p>
+</form>
+
+{%endfor%}
