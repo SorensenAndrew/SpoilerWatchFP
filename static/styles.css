@@ -90,25 +90,6 @@ ul.topnav li a {
     color: #617799;
 }
 
-.friendBubble{
-    background-color: #c7c7c7;
-    border-radius: 6px;
-    padding:30px;
-    margin: 10px;
-    height: 25%;
-}
-
-.friendShow{
-    background-color: #c7c7c7;
-    border-radius: 6px;
-    padding:30px;
-    margin: 10px;
-    height: 55%;
-    width: 40%;
-    float: left;
-    text-align: center;
-}
-
 .badgeForm{
     background-color: #c7c7c7;
     border-radius: 6px;
@@ -222,7 +203,7 @@ h4{
         margin-top: 5%;
     }
 
-/* Update Shows Form */
+/* My Shows Page*/
 
 .updateShowForm{
     margin-left: 5%;
@@ -236,6 +217,35 @@ h4{
 
 }
 
+#showTile{
+    height: 85%;
+}
+
+/* Display Friends */
+
+.friendBubble{
+    background-color: #c7c7c7;
+    border-radius: 6px;
+    padding:30px;
+    margin: 10px;
+    height: 25%;
+}
+
+/* Displaying Friend Data */
+
+.friendShow{
+    background-color: #c7c7c7;
+    border-radius: 6px;
+    padding:30px;
+    margin: 10px;
+    height: 30%;
+    width: 30%;
+    float: left;
+    display: inline;
+    text-align: center;
+}
+
+
 /* restyling the container */
 .medium-3 {
     width: 22%;
@@ -245,6 +255,9 @@ h4{
 .alignContainer{
   margin-left:120px;
 }
+
+
+
 
 /* fixing foundation last item arrangement to column */
 
