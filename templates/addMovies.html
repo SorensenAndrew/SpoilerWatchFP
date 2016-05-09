@@ -1,2 +1,7 @@
 {%include 'movieNav.html'%}
-<h2>Add Movies</h2>
+<h2>Add New Movies</h2>
+<form class="medium-2 columns addShow" action="/addMovies" method="post">
+    <h4>Show Title:</h4>
+    <input class="addInput" name="title">
+    <input id="searchSubmit" class="submit" type="submit" value="Submit">
+</form>

@@ -4,6 +4,10 @@
 @include top-bar-stacked;
 @include top-bar-unstack;
 
+body{
+    background-image: url("../images/nice_snow.png");
+}
+
 
 body#dummybodyid {
     padding: 0px;
@@ -17,9 +21,23 @@ ul.topnav {
     padding: 0;
     overflow: hidden;
     background-color: #617799;
+
 }
 nav{
     width: 100%;
+}
+
+.toggle{
+    border: 1px solid black;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+    border-radius: 15px;
+}
+
+#tvToggle{
+    background-color: #617799;
+    color: #f2f2f2;
 }
 
 #logout{
@@ -71,6 +89,9 @@ ul.topnav li a {
     margin: 10px;
     height: 55%;
     width: 35%;
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
 }
 
 .showContent{
