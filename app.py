@@ -15,7 +15,7 @@ app.secret_key = "4321"
 
 @app.route('/')
 def index():
-    return render_template('login.html')
+    return redirect('/login')
 
 ###### News Feed #####
 
