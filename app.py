@@ -22,7 +22,7 @@ def index():
 @app.route('/home')
 def navhome():
     name = session["username"]
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
     cursor.execute("select * from showData where username!='"+ name + "' order by dateAdded desc")
     showdata = cursor.fetchall()
@@ -38,7 +38,7 @@ def login():
 
 @app.route('/users')
 def users():
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
     cursor.execute("select * from users")
     data = cursor.fetchall()
@@ -48,7 +48,7 @@ def users():
 @app.route('/shows')
 def show():
     name = session["username"]
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
     cursor.execute("select showName, showTitle, showSeason, showEpisode,episodeCount from showData where username='"+ name+ "'")
     showdata = cursor.fetchall()
@@ -60,7 +60,7 @@ def show():
 def badgePage():
     name = session["username"]
     showName = request.form['showName']
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
     cursor.execute("select showName, showTitle, showSeason, showEpisode,episodeCount, plot, airDate from showData where showName='" + showName + "' and username='" + name + "'")
     showdata = cursor.fetchall()
@@ -74,7 +74,7 @@ def badgePage():
 @app.route('/allBadges', methods=['get'])
 def allBadges():
     name = session["username"]
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     badgeCursor = db.cursor()
     badgeCursor.execute("select badges from badges where username='" + name + "'")
     badgeData = badgeCursor.fetchall()
@@ -86,7 +86,7 @@ def allBadges():
 def checklogin():
     session["username"] = request.form["username"]
     session["password"] = request.form["password"]
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
     hashval = hashlib.md5(request.form["password"]).hexdigest()
     cursor.execute("select * from users where username=%s and password=%s", (session["username"], session["password"]))
@@ -107,7 +107,7 @@ def friendForm():
 def addfriend():
     name = session["username"]
     friend = request.form['Addfriend']
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
     cursor.execute("insert into friends(username1, username2)values(%s,%s)", (name, friend))
     db.commit()
@@ -116,7 +116,7 @@ def addfriend():
 @app.route('/friends')
 def friends():
     name = session["username"]
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
     cursor.execute("select username1, username2 from friends where username1='"+ name+ "'")
     data = cursor.fetchall()
@@ -125,7 +125,7 @@ def friends():
 @app.route('/manageFriends', methods=['post', 'get'])
 def friendmanager():
     name = session["username"]
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
     cursor.execute("select username1, username2 from friends where username1='"+ name+ "'")
     data = cursor.fetchall()
@@ -134,7 +134,7 @@ def friendmanager():
 @app.route('/friendData',methods=['post', 'get'])
 def frienddata():
     friendname = request.form['friend']
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
     cursor.execute("select showName, showTitle, showSeason, showEpisode from showData where username='" + friendname + "'")
     data = cursor.fetchall()
@@ -147,7 +147,7 @@ def frienddata():
 def deletefriend():
     name = session["username"]
     friendname = request.form['friend']
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
     cursor.execute("delete from friends where username2='" + friendname + "' and username1='"+ name+ "'")
     db.commit()
@@ -165,7 +165,7 @@ def newUser():
 def addUser():
     uname = request.form['newUser']
     upass = request.form['newPassword']
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
     cursor.execute("select username from users")
     users = cursor.fetchall()
@@ -204,7 +204,7 @@ def parseJSON():
     airDate = data['Released']
     tE = int(totalEpisodes)
     eD = int(episodedata)
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
     cursor.execute("insert into showData(username, showTitle, showSeason, showEpisode, showName, episodeCount, plot, airDate)values(%s,%s,%s,%s,%s, %s, %s, %s)", (name, titledata, seasondata, episodedata, title, totalEpisodes, plotData, airDate))
     cursor2 = db.cursor()
@@ -250,7 +250,7 @@ def nprForm():
 def deleteshow():
     name = session["username"]
     random = request.form["random"]
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
     cursor.execute("delete from showData where showName='" + random + "' and username='" + name + "'")
     db.commit()
@@ -265,7 +265,7 @@ def form():
 @app.route('/dataRoute', methods=['get'])
 def dataRoute():
     name = session["username"]
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='CLEARDB_us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='CLEARDB_us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor2 = db.cursor2()
     cursor2.execute("select showName, showEpisode, episodeCount from showData where username='" + name + "'")
     newVar = cursor2.fetchall()
@@ -292,7 +292,7 @@ def updateshow():
     seasondata= data['Season']
     plotdata = data['Plot']
     airdatedata = data['Released']
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
     cursor.execute("update showData set showTitle=%s, showSeason=%s, showEpisode=%s, plot=%s, airDate=%s where showName='" + title + "' and username='" + name  + "'", (titledata, seasondata, episodedata, plotdata, airdatedata ))
     cursor2 = db.cursor()
