@@ -4,10 +4,6 @@
 @include top-bar-stacked;
 @include top-bar-unstack;
 
-body{
-    background-image: url("../images/nice_snow.png");
-}
-
 
 body#dummybodyid {
     padding: 0px;
