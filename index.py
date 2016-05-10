@@ -3,18 +3,11 @@ from flask import redirect
 from flask import request
 from flask import render_template
 from flask import session
-from collections import OrderedDict
-from flask import jsonify
 import urllib
 import json
-import pprint
 import hashlib
 import mysql.connector
-from urllib2 import urlopen
-from urllib2 import Request
-from json import load
-from lxml import html
-import requests
+
 
 
 app = Flask(__name__)
