@@ -273,8 +273,8 @@ def form():
 @app.route('/dataRoute', methods=['get'])
 def dataRoute():
     name = session["username"]
-    db2 = mysql.connector.connect(user='root', password='root',host='localhost', database='spoilerDB', port='8889')
-    cursor2 = db2.cursor2()
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='CLEARDB_DATABASE_URL', database='heroku_0762eace2527e49', port='8889')
+    cursor2 = db.cursor2()
     cursor2.execute("select showName, showEpisode, episodeCount from showData where username='" + name + "'")
     newVar = cursor2.fetchall()
     print newVar
