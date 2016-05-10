@@ -89,7 +89,6 @@ def checklogin():
     db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
     cursor = db.cursor()
     hashval = hashlib.md5(request.form["password"]).hexdigest()
-
     cursor.execute("select * from users where username=%s and password=%s", (session["username"], session["password"]))
     data = cursor.fetchall()
     if data:
