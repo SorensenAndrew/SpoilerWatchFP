@@ -9,6 +9,11 @@ body#dummybodyid {
     padding: 0px;
 }
 
+body{
+    background-image: url('images/wall.png');
+    background-repeat: repeat;
+}
+
 /* Nav Stylings */
 
 ul.topnav {
@@ -23,30 +28,8 @@ nav{
     width: 100%;
 }
 
-.toggle{
-    border: 1px solid black;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    text-align: center;
-    border-radius: 15px;
-}
-
-#tvToggle{
-    background-color: #617799;
-    color: #f2f2f2;
-}
-
 #logout{
     margin-left: 585%;
-}
-
-.footer{
-    margin: 0px;
-    margin-top: 25px;
-    width: 100%;
-    height: 75px;
-    background-color: #617799;
-
 }
 
 ul.topnav li {float: left;}
@@ -128,6 +111,27 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Keep Calm Medium';
     margin: 2%;
 }
+
+
+/* Login Page */
+
+.loginCTA{
+    margin: 2%;
+}
+
+.mute{
+    margin-left: -40%;
+}
+
+.ctaTxt{
+    margin-top: 35px;
+    font-size: 1.2em;
+}
+
+#muteTxt{
+    margin-right: 325px;
+}
+/* ################### */
 
 .feed{
     background-color: #c7c7c7;
@@ -227,7 +231,7 @@ h4{
 }
 
 #update{
-  width:7%;
+  width:10%;
   padding:0px;
   margin-top: 10px;
   margin-bottom: 25px;
@@ -347,6 +351,12 @@ h4{
     #logout{
         margin-left: 25%;
     }
+    .loginCTA{
+        display: none;
+    }
+    .call{
+        display:none;
+    }
 
 }
 
@@ -372,6 +382,12 @@ h4{
 
     #logout{
         margin-left: 95%;
+    }
+    .loginCTA{
+        display: none;
+    }
+    .call{
+        display:none;
     }
 
 }

@@ -325,65 +325,6 @@ def formtest():
     hashed = hashlib.md5(userinput).hexdigest()
     return hashed
 
-######################################## MOVIE SECTIONS ###################################################
-
-# @app.route('/movieToggle')
-# def movieToggle():
-#     return render_template('moviesHome.html')
-#
-# @app.route('/movies')
-# def movies():
-#     return render_template('movies.html')
-#
-# @app.route('/addMovies', methods=['post','get'])
-# def addMovies():
-#     name = session["username"].title()
-#     title = request.form["title"].title()
-#     url = "http://www.omdbapi.com/?t=" + title+"&r=json"
-#     url = url.replace(" ","%20")
-#     loadurl = urllib.urlopen(url)
-#     data = json.loads(loadurl.read().decode(loadurl.info().getparam('charset') or 'utf-8'))
-#     year = data['Year']
-#     rating = data['Rated']
-#     plot = data['Plot']
-#     actors = data['Actors']
-#     writer = data['Writer']
-#     director = data['Director']
-#     genre = data['Genre']
-#     awards = data['Awards']
-#     db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49', port='8889')
-#     cursor = db.cursor()
-#     cursor.execute("insert into movieData(username, movieTitle, movieYear, genre, rating, director, writer, actor, awards, plot)values(%s,%s,%s,%s,%s, %s, %s, %s, %s, %s)", (name, title, year, genre, rating, director, writer, actors, awards, plot))
-#     cursor2 = db.cursor()
-#     cursor2.execute("select showEpisode, episodeCount from showData where showName='" + title + "'")
-#     new_count = cursor2.fetchall()
-#     cursor4 = db.cursor()
-#     cursor4.execute("select movieTitle from movieData where username='" + name + "'")
-#     totalMoviesFollowed = cursor4.fetchall()
-#     if len(totalMoviesFollowed) == 5:
-#         movieNumberBadge = "Following 5 Movies!"
-#         cursor5 = db.cursor()
-#         cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, movieNumberBadge))
-#     elif len(totalMoviesFollowed) == 10:
-#         movieNumberBadge = "Following 10 Movies!"
-#         cursor5 = db.cursor()
-#         cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, movieNumberBadge))
-#     elif len(totalMoviesFollowed) == 15:
-#         movieNumberBadge = "Following 15 Movies!"
-#         cursor5 = db.cursor()
-#         cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, movieNumberBadge))
-#     elif len(totalMoviesFollowed) == 20:
-#         movieNumberBadge = "Following 20 Movies!"
-#         cursor5 = db.cursor()
-#         cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, movieNumberBadge))
-#     elif len(totalMoviesFollowed) == 25:
-#         movieNumberBadge = "Following 25 Movies!"
-#         cursor5 = db.cursor()
-#         cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, movieNumberBadge))
-#     db.commit()
-#     return render_template('addMovies.html', data=data)
-
-
 
 if __name__ == '__main__':
     app.run(debug = True)
