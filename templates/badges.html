@@ -1,3 +1,6 @@
+<!-- Icon made by http://www.flaticon.com/authors/freepik from www.flaticon.com -->
+
+
 {%include 'nav.html'%}
 
 {%for show in showdata %}
@@ -60,8 +63,10 @@
 
 <h3 class="header">Badges</h3>
 {%for badge in badgeData %}
-<div class="medium-12 columns badge"><p class="badgeText">{{badge[1]}}</p></div>
-
+<div class="large-3 columns iBadge">
+    <img src="../static/images/award.png">
+    <p class="badgeText">{{badge[1]}}</p>
+</div>
 
 
 {%endfor%}
