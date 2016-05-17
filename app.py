@@ -8,14 +8,15 @@ import json
 import hashlib
 import mysql.connector
 
-
-
 app = Flask(__name__)
 app.secret_key = "4321"
 
 @app.route('/')
 def index():
     return redirect('/login')
+
+### Error Handling ####
+
 
 ###### News Feed #####
 
@@ -180,65 +181,68 @@ def addUser():
 
 @app.route('/parseJSON',methods=['post', 'get'])
 def parseJSON():
-    name = session["username"].title()
-    title = request.form["title"].title()
-    season = request.form['season']
-    episode = request.form['episode']
-    url = "http://www.omdbapi.com/?t=" + title +"&Season="+ season + "&Episode=" + episode +"&r=json"
-    url = url.replace(" ","%20")
-    loadurl = urllib.urlopen(url)
-    data = json.loads(loadurl.read().decode(loadurl.info().getparam('charset') or 'utf-8'))
-    url2 = "http://www.omdbapi.com/?t=" + title +"&Season="+ season +"&r=json"
-    url2 = url2.replace(" ","%20")
-    loadurl2 = urllib.urlopen(url2)
-    data2 = json.loads(loadurl2.read().decode(loadurl2.info().getparam('charset') or 'utf-8'))
-    episodeCount = []
-    episodeCount.append(data2['Episodes'])
-    for i in range(len(episodeCount)):
-        print len(episodeCount[i])
-    totalEpisodes = len(episodeCount[i])
-    episodedata = data['Episode']
-    titledata = data['Title']
-    seasondata= data['Season']
-    plotData = data['Plot']
-    airDate = data['Released']
-    tE = int(totalEpisodes)
-    eD = int(episodedata)
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
-    cursor = db.cursor()
-    cursor.execute("insert into showData(username, showTitle, showSeason, showEpisode, showName, episodeCount, plot, airDate)values(%s,%s,%s,%s,%s, %s, %s, %s)", (name, titledata, seasondata, episodedata, title, totalEpisodes, plotData, airDate))
-    cursor2 = db.cursor()
-    cursor2.execute("select showEpisode, episodeCount from showData where showName='" + title + "'")
-    new_count = cursor2.fetchall()
-    if eD == tE:
-        badge = "You have completed season '" + season + "' of '" + title + "'"
-        cursor3 = db.cursor()
-        cursor3.execute("insert into badges(username, showSeason, showName, badges)values(%s,%s,%s,%s)", (name, season, title, badge))
-    cursor4 = db.cursor()
-    cursor4.execute("select showName from showData where username='" + name + "'")
-    totalShowsFollowed = cursor4.fetchall()
-    if len(totalShowsFollowed) == 5:
-        showNumberBadge = "Following 5 Shows!"
-        cursor5 = db.cursor()
-        cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, showNumberBadge))
-    elif len(totalShowsFollowed) == 10:
-        showNumberBadge = "Following 10 Shows!"
-        cursor5 = db.cursor()
-        cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, showNumberBadge))
-    elif len(totalShowsFollowed) == 15:
-        showNumberBadge = "Following 15 Shows!"
-        cursor5 = db.cursor()
-        cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, showNumberBadge))
-    elif len(totalShowsFollowed) == 20:
-        showNumberBadge = "Following 20 Shows!"
-        cursor5 = db.cursor()
-        cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, showNumberBadge))
-    elif len(totalShowsFollowed) == 25:
-        showNumberBadge = "Following 25 Shows!"
-        cursor5 = db.cursor()
-        cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, showNumberBadge))
-    db.commit()
-    return render_template('profilePage.html',data=data,newVar=new_count)
+    try:
+        name = session["username"].title()
+        title = request.form["title"].title()
+        season = request.form['season']
+        episode = request.form['episode']
+        url = "http://www.omdbapi.com/?t=" + title +"&Season="+ season + "&Episode=" + episode +"&r=json&apikey=e24fb313 "
+        url = url.replace(" ","%20")
+        loadurl = urllib.urlopen(url)
+        data = json.loads(loadurl.read().decode(loadurl.info().getparam('charset') or 'utf-8'))
+        url2 = "http://www.omdbapi.com/?t=" + title +"&Season="+ season +"&r=json"
+        url2 = url2.replace(" ","%20")
+        loadurl2 = urllib.urlopen(url2)
+        data2 = json.loads(loadurl2.read().decode(loadurl2.info().getparam('charset') or 'utf-8'))
+        episodeCount = []
+        episodeCount.append(data2['Episodes'])
+        for i in range(len(episodeCount)):
+            print len(episodeCount[i])
+        totalEpisodes = len(episodeCount[i])
+        episodedata = data['Episode']
+        titledata = data['Title']
+        seasondata= data['Season']
+        plotData = data['Plot']
+        airDate = data['Released']
+        tE = int(totalEpisodes)
+        eD = int(episodedata)
+        db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
+        cursor = db.cursor()
+        cursor.execute("insert into showData(username, showTitle, showSeason, showEpisode, showName, episodeCount, plot, airDate)values(%s,%s,%s,%s,%s, %s, %s, %s)", (name, titledata, seasondata, episodedata, title, totalEpisodes, plotData, airDate))
+        cursor2 = db.cursor()
+        cursor2.execute("select showEpisode, episodeCount from showData where showName='" + title + "'")
+        new_count = cursor2.fetchall()
+        if eD == tE:
+            badge = "You have completed season '" + season + "' of '" + title + "'"
+            cursor3 = db.cursor()
+            cursor3.execute("insert into badges(username, showSeason, showName, badges)values(%s,%s,%s,%s)", (name, season, title, badge))
+        cursor4 = db.cursor()
+        cursor4.execute("select showName from showData where username='" + name + "'")
+        totalShowsFollowed = cursor4.fetchall()
+        if len(totalShowsFollowed) == 5:
+            showNumberBadge = "Following 5 Shows!"
+            cursor5 = db.cursor()
+            cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, showNumberBadge))
+        elif len(totalShowsFollowed) == 10:
+            showNumberBadge = "Following 10 Shows!"
+            cursor5 = db.cursor()
+            cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, showNumberBadge))
+        elif len(totalShowsFollowed) == 15:
+            showNumberBadge = "Following 15 Shows!"
+            cursor5 = db.cursor()
+            cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, showNumberBadge))
+        elif len(totalShowsFollowed) == 20:
+            showNumberBadge = "Following 20 Shows!"
+            cursor5 = db.cursor()
+            cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, showNumberBadge))
+        elif len(totalShowsFollowed) == 25:
+            showNumberBadge = "Following 25 Shows!"
+            cursor5 = db.cursor()
+            cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, showNumberBadge))
+        db.commit()
+        return render_template('profilePage.html',data=data,newVar=new_count)
+    except:
+        return render_template('error.html')
 
 
 @app.route('/showSearch')
@@ -278,36 +282,39 @@ def dataRoute():
 
 @app.route('/updateShow', methods=['post', 'get'])
 def updateshow():
-    name = session["username"]
-    title = request.form["title"]
-    season = request.form['season']
-    episode = request.form['episode']
-    url = "http://www.omdbapi.com/?t=" + title +"&Season="+ season + "&Episode=" + episode +"&r=json"
-    url = url.replace(" ","%20")
-    loadurl = urllib.urlopen(url)
-    data = json.loads(loadurl.read().decode(loadurl.info().getparam('charset') or 'utf-8'))
-    episodedata = data['Episode']
-    eD = int(episodedata)
-    titledata = data['Title']
-    seasondata= data['Season']
-    plotdata = data['Plot']
-    airdatedata = data['Released']
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
-    cursor = db.cursor()
-    cursor.execute("update showData set showTitle=%s, showSeason=%s, showEpisode=%s, plot=%s, airDate=%s where showName='" + title + "' and username='" + name  + "'", (titledata, seasondata, episodedata, plotdata, airdatedata ))
-    cursor2 = db.cursor()
-    cursor2.execute("select showEpisode, episodeCount, plot, airDate from showData where showName='" + title + "'")
-    new_count = cursor2.fetchall()
-    cursor3 = db.cursor()
-    cursor3.execute("select episodeCount from showData where showName='" + title + "'")
-    testvar = cursor3.fetchone()
-    tE = testvar[0]
-    if eD == tE:
-        badge = "You have completed season '" + season + "' of '" + title + "'"
+    try:
+        name = session["username"]
+        title = request.form["title"]
+        season = request.form['season']
+        episode = request.form['episode']
+        url = "http://www.omdbapi.com/?t=" + title +"&Season="+ season + "&Episode=" + episode +"&r=json"
+        url = url.replace(" ","%20")
+        loadurl = urllib.urlopen(url)
+        data = json.loads(loadurl.read().decode(loadurl.info().getparam('charset') or 'utf-8'))
+        episodedata = data['Episode']
+        eD = int(episodedata)
+        titledata = data['Title']
+        seasondata= data['Season']
+        plotdata = data['Plot']
+        airdatedata = data['Released']
+        db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
+        cursor = db.cursor()
+        cursor.execute("update showData set showTitle=%s, showSeason=%s, showEpisode=%s, plot=%s, airDate=%s where showName='" + title + "' and username='" + name  + "'", (titledata, seasondata, episodedata, plotdata, airdatedata ))
+        cursor2 = db.cursor()
+        cursor2.execute("select showEpisode, episodeCount, plot, airDate from showData where showName='" + title + "'")
+        new_count = cursor2.fetchall()
         cursor3 = db.cursor()
-        cursor3.execute("insert into badges(username, showSeason, showName, badges)values(%s,%s,%s,%s)", (name, season, title, badge))
-    db.commit()
-    return render_template('profilePage.html',data=data, newVar=new_count)
+        cursor3.execute("select episodeCount from showData where showName='" + title + "'")
+        testvar = cursor3.fetchone()
+        tE = testvar[0]
+        if eD == tE:
+            badge = "You have completed season '" + season + "' of '" + title + "'"
+            cursor3 = db.cursor()
+            cursor3.execute("insert into badges(username, showSeason, showName, badges)values(%s,%s,%s,%s)", (name, season, title, badge))
+        db.commit()
+        return render_template('profilePage.html',data=data, newVar=new_count)
+    except:
+        return render_template('error.html')
 
 
 ######### Logout ###############

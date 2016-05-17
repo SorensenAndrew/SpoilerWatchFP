@@ -7,40 +7,30 @@
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.css">
     <script src="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.js"></script>
+    <script src="js/main.js"></script>
 </head>
-<body style="background-image:url('../static/images/wall.png')">
-<nav>
+<body style="background-color: black; font-family: 'Walkway Semibold';">
+        <nav>
              <ul class="topnav">
-           <li><a class="header" id="sw" href="/login">Spoiler Watch</a></li>
+           <h1><a class="header" id="sw" href="/login">Watcher</a></h1>
         </ul>
 
         </nav>
-    <div class="large-12 columns">
-        <div class="medium-3 columns wrapper">
-            <h2 class="header">Login</h2>
-            <form action="/checklogin" method="post">
-                Username: <input type="text" name="username" style="margin:5px">
-                <br>
-                Password: <input type="password" name="password" style="margin:5px">
-                <br>
-                <input class="submit" type="submit" style="margin:5px">
+            <form action="/checklogin" method="post" class="large-2 columns login">
+                <input class="loginInput login" placeholder="username" type="text" name="username" style="margin:5px">
+
+                <input class="loginInput login" placeholder="password" type="password" name="password" style="margin:5px">
+                <input value="Log In"  class="submit login" type="submit"  style="margin:5px">
             </form>
-             <h2 class="header">Not A User?</h2>
-            <a style="font-size:25px" href="/newUser">Sign Up Now!</a>
+            <div class="large-9 columns">
+                <img class="loginPoster" id="poster1" src="http://img.omdbapi.com/?i=tt0903747&h=350&apikey=e24fb313">
+                <p id="poster1Txt">Watcher lets TV lovers keep track of their shows.</p>
+                <img class="loginPoster" id="poster2" src="http://img.omdbapi.com/?i=tt0460649&h=350&apikey=e24fb313">
+                <p id="poster2Txt">Connect with friends to see what they are watching.</p>
+                <img class="loginPoster" id="poster3" src="http://img.omdbapi.com/?i=tt0773262&h=350&apikey=e24fb313">
+                <p id="poster3Txt">Earn badges and learn about your favorite shows.</p>
+                <a id="joinTxt" href="/newUser">Become a Watcher now!</a>
             </div>
-            <div class="medium-8 columns">
-    </div>
-        <div class="large-6 columns loginCTA call">
-            <img class="large-3 columns" src="../static/images/peopleIcon.png">
-            <p class="large-9 columns ctaTxt">Connect with friends so you can keep track of each others progress in the latest shows.</p>
-        </div>
-        <div class="large-6 columns loginCTA call">
-            <img class="large-3 columns" src="../static/images/trophy.png">
-            <p class="large-9 columns ctaTxt">Collect badges to show off your level of dedication.</p>
-        </div>
-        <div class="large-6 columns loginCTA call">
-            <img class="large-3 columns mute" src="../static/images/mute.png">
-            <p id="muteTxt" class="large-8 columns ctaTxt">Most importantly, help prevent spoilers for you and your friends!</p>
-        </div>
-    </div>
+        <a style="display:none;" href="/newUser">Sign Up!</a>
+    <!--<img src="http://img.omdbapi.com/?i=tt1520211&h=520&apikey=e24fb313">-->
 

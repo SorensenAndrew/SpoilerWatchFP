@@ -10,10 +10,29 @@ body#dummybodyid {
 }
 
 body{
-    background-image: url('images/wall.png');
+    background-color: black;
     background-repeat: repeat;
+    color: white;
 }
 
+.header{
+    color: white;
+    font-family: 'Keep Calm Medium';
+    margin: 2%;
+}
+
+p, input, a{
+    font-family: 'Walkway Semibold';
+
+}
+
+/* Error Page */
+
+ul{
+    font-size: 25px;
+    margin-left: 25%;
+    margin-top: 15px;
+}
 
 /* Nav Stylings */
 
@@ -22,15 +41,15 @@ ul.topnav {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #617799;
 
 }
 nav{
     width: 100%;
 }
 
-#logout{
-    margin-left: 585%;
+nav h1{
+ font-size: 40px;
+ padding-left: 23px;
 }
 
 ul.topnav li {float: left;}
@@ -47,24 +66,27 @@ ul.topnav li a {
 }
 
 
-.columns{
-    font-family: 'Walkway Semibold'
 
+
+#sw{
+  font-size: 40px;
+  color: white;
+  margin: 10px;
+}
+
+#sw:hover{
+  background-color: #333;
 }
 
 
 /* ############################### */
 
-.wrapper{
-    background-color: #c7c7c7;
-    border-radius: 25px;
-    padding:30px;
-    margin: 10px;
-}
+
+
 
 .bubble{
-    background-color: #c7c7c7;
     border-radius: 6px;
+    border: 1px solid #cacaca;
     padding:30px;
     margin: 10px;
     height: 55%;
@@ -100,35 +122,88 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
-.header{
-    color: #617799;
-    font-family: 'Keep Calm Medium';
-    margin: 2%;
-}
-
-
 /* Login Page */
 
-.loginCTA{
-    margin: 2%;
+.login{
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
-.mute{
-    margin-left: -40%;
+.submit {
+    background-color: #454545;
+    border: 1px solid #cacaca;
+    color: whitesmoke;
+    padding: 4px;
+    width: 40%;
+    border: none;
+    height: 40px;
+    border-radius: 2px;
 }
 
-.ctaTxt{
-    margin-top: 35px;
-    font-size: 1.2em;
+.submit:hover{
+    background-color: #333;
+    color: whitesmoke;
+
 }
 
-#muteTxt{
-    margin-right: 325px;
+.loginInput{
 }
+
+.loginPoster{
+    position:absolute;
+    -webkit-box-shadow: -5px 5px 5px 1px black;
+    -moz-box-shadow: 5 5px 5px 1px black;
+    box-shadow: -5px 5px 5px 1px black;
+}
+
+#poster1{
+    z-index: -1;
+}
+
+#poster1Txt{
+    margin-left: 28%;
+    color: white;
+    font-size: 25px;
+}
+
+#poster2{
+    margin-left: 5%;
+    margin-top: 4%;
+    z-index: -1;
+}
+
+#poster2Txt{
+    color: white;
+    margin-left: 35%;
+    margin-top: 8%;
+    font-size: 25px;
+}
+
+#poster3{
+    margin-top: 4%;
+    margin-left: 10%;
+    z-index: -1;
+}
+
+#poster3Txt{
+    color: white;
+    margin-left: 45%;
+    margin-top: 9%;
+    font-size: 25px;
+}
+
+#joinTxt{
+    margin-left: 58%;
+    margin-top: 95%;
+    font-size: 25px;
+}
+
+
 /* ################### */
 
 .feed{
-    background-color: #c7c7c7;
+    border: 1px solid #cacaca;
     border-radius: 6px;
     padding:30px;
     margin-left: 25%;
@@ -152,15 +227,7 @@ h4{
   font-weight: bolder;
 }
 
-#sw{
-  font-size: 2em;
-  color: white;
-  margin: 10px;
-}
 
-#sw:hover{
-  background-color: #617799;
-}
 
 
 
@@ -179,6 +246,21 @@ h4{
         margin-left: 10%;
         margin-top: 5%;
     }
+
+.callTxt{
+    margin-top: 30px;
+}
+
+.callTxt2{
+    margin-top: 20px;
+}
+
+
+.call{
+    margin-bottom: 35px;
+}
+
+
 
 /* My Shows Page*/
 
@@ -201,7 +283,7 @@ h4{
 /* Display Friends */
 
 .friendBubble{
-    background-color: #c7c7c7;
+    border: 1px solid #cacaca;
     border-radius: 6px;
     padding:30px;
     margin: 10px;
@@ -214,7 +296,7 @@ h4{
 /* Displaying Friend Data */
 
 .friendShow{
-    background-color: #c7c7c7;
+    border: 1px solid #cacaca;
     border-radius: 6px;
     padding:30px;
     margin: 10px;
@@ -240,7 +322,7 @@ h4{
 }
 
 .badgeForm{
-    background-color: #c7c7c7;
+    border: 1px solid #cacaca;
     border-radius: 6px;
     padding:30px;
     margin: 10px;
@@ -282,21 +364,7 @@ h4{
 }
 
 
-.submit {
-    background-color: #617799;
-    color: whitesmoke;
-    padding: 4px;
-    width: 100%;
-    border: none;
-    height: 40px;
-    border-radius: 2px;
-}
 
-.submit:hover{
-    background-color: black;
-    color: whitesmoke;
-
-}
 
 
 /* Media Queries */
@@ -318,11 +386,6 @@ h4{
     .badgeForm{
         height: 100%;
     }
-
-    #sw{
-        display:none;
-    }
-
     .friendShow{
         width: 95%;
     }
@@ -346,11 +409,25 @@ h4{
     #logout{
         margin-left: 25%;
     }
-    .loginCTA{
-        display: none;
-    }
     .call{
         display:none;
+    }
+    #poster1Txt{
+        background-color: #454545;
+        padding: 5px;
+    }
+    #poster2Txt{
+        background-color: #454545;
+        padding: 5px;
+    }
+    #poster3Txt{
+        background-color: #454545;
+        padding: 5px;
+    }
+    #joinTxt{
+        margin-left: 15%;
+        background-color: #454545;
+        padding: 5px;
     }
 
 }
@@ -365,11 +442,6 @@ h4{
     .badgeForm{
         height: 95%;
     }
-
-    #sw{
-        display:none;
-    }
-
     .friendShow{
         width: 85%;
         margin-left: 8%;
@@ -383,6 +455,20 @@ h4{
     }
     .call{
         display:none;
+    }
+    #poster1Txt{
+        background-color: #454545;
+        padding: 1px;
+    }
+    #poster2Txt{
+        background-color: #454545;
+        padding: 1px;
+
+    }
+    #poster3Txt{
+        background-color: #454545;
+        padding: 1px;
+
     }
 
 }
