@@ -63,7 +63,7 @@ def badgePage():
     showName = request.form['showName']
     db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
-    cursor.execute("select showName, showTitle, showSeason, showEpisode,episodeCount, plot, airDate from showData where showName='" + showName + "' and username='" + name + "'")
+    cursor.execute("select showName, showTitle, showSeason, showEpisode,episodeCount, plot, posterID, airDate from showData where showName='" + showName + "' and username='" + name + "'")
     showdata = cursor.fetchall()
     badgeCursor = db.cursor()
     badgeCursor.execute("select showName, badges from badges where showName='" + showName + "' and username='" + name + "'")
@@ -204,11 +204,12 @@ def parseJSON():
         seasondata= data['Season']
         plotData = data['Plot']
         airDate = data['Released']
+        posterID = data['imdbID']
         tE = int(totalEpisodes)
         eD = int(episodedata)
         db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
         cursor = db.cursor()
-        cursor.execute("insert into showData(username, showTitle, showSeason, showEpisode, showName, episodeCount, plot, airDate)values(%s,%s,%s,%s,%s, %s, %s, %s)", (name, titledata, seasondata, episodedata, title, totalEpisodes, plotData, airDate))
+        cursor.execute("insert into showData(username, showTitle, showSeason, showEpisode, showName, episodeCount, plot, posterID, airDate)values(%s,%s,%s,%s,%s, %s, %s, %s, %s)", (name, titledata, seasondata, episodedata, title, totalEpisodes, plotData, posterID, airDate))
         cursor2 = db.cursor()
         cursor2.execute("select showEpisode, episodeCount from showData where showName='" + title + "'")
         new_count = cursor2.fetchall()

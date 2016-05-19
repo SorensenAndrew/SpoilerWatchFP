@@ -1,28 +1,18 @@
 {%include 'nav.html'%}
 
-<h3 class="large-12 columns header">Update Shows</h3>
 
-<form class="medium-6 columns updateShowForm" action="/updateShow" method="post">
+<form class="large-12 columns" action="/updateShow" method="post">
     <input placeholder="Show Title" name="title">
     <input placeholder="Season" name="season">
     <input placeholder="Episode #" name="episode">
-    <br>
     <input id="update" class="submit" type="submit" value="Update Show">
 
     <div class="medium-6-columns call">
-    <img class="large-1 columns call" src="../static/images/exclamationRed.png">
+    <img class="medium-1 columns call" src="../static/images/exclamationRed.png">
     <p class="large-11 columns call">Remember to only use this form to update shows you are already watching.</p>
 </div>
 
 </form>
-
-
-
-
-<h3 class="large-12 columns header">Last Episodes Watched:</h3>
-
-
-
 
 <div id="showTile">
 {%for show in showdata %}

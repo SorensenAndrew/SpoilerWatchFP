@@ -18,13 +18,15 @@ body{
 .header{
     color: white;
     font-family: 'Keep Calm Medium';
-    margin: 2%;
+    margin: 1%;
 }
 
 p, input, a{
     font-family: 'Walkway Semibold';
 
 }
+
+
 
 /* Error Page */
 
@@ -65,25 +67,53 @@ ul.topnav li a {
     font-size: 17px;
 }
 
+ul.topnav li a:hover{
+    background-color: #333;
+}
 
 
 
 #sw{
   font-size: 40px;
   color: white;
-  margin: 10px;
 }
 
 #sw:hover{
   background-color: #333;
 }
 
+#myShows:hover{
+    background-color:#333;
+}
 
-/* ############################### */
+#addShows:hover{
+    background-color:#333;
+}
+
+#addFriendsNav:hover{
+    background-color:#333;
+}
+
+#friendsNav:hover{
+    background-color:#333;
+}
+
+#badgeNav:hover{
+    background-color:#333;
+}
+
+#logout:hover{
+    background-color:#333;
+}
 
 
+/* ##############  User Registration   ################# */
 
+.oathTxt{
+    font-size: 20px;
+}
 
+/* */
 .bubble{
     border-radius: 6px;
     border: 1px solid #cacaca;
@@ -113,15 +143,6 @@ ul.topnav li a {
     color: #617799;
 }
 
-
-
-
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Keep Calm Medium';
-
-}
-
 /* Login Page */
 
 .login{
@@ -135,7 +156,7 @@ h1, h2, h3, h4, h5, h6 {
     border: 1px solid #cacaca;
     color: whitesmoke;
     padding: 4px;
-    width: 40%;
+    width: 80%;
     border: none;
     height: 40px;
     border-radius: 2px;
@@ -145,9 +166,6 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #333;
     color: whitesmoke;
 
-}
-
-.loginInput{
 }
 
 .loginPoster{
@@ -194,8 +212,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #joinTxt{
-    margin-left: 58%;
-    margin-top: 95%;
+    margin-left: 57%;
+    margin-top: 75%;
     font-size: 25px;
 }
 
@@ -234,17 +252,13 @@ h4{
 /* Add Shows Form */
 
 .addShow{
-    margin-left: 5%;
+    color: black;
 }
 
-.addInput{
-    margin-left: 10%;
-}
 
 #searchSubmit{
-        width: 45%;
-        margin-left: 10%;
-        margin-top: 5%;
+        width: 10%;
+        margin-top: 2%;
     }
 
 .callTxt{
@@ -260,19 +274,42 @@ h4{
     margin-bottom: 35px;
 }
 
+span.ui-helper-hidden-accessible{
+    display: none;
+}
+
+.ui-autocomplete {
+    background: #4a4a4a;
+    border-radius: 0px;
+    list-style: none;
+    width: 30%;
+}
+
+.ui-menu .ui-menu-item a{
+    height:10px;
+    font-size:25px;
+    }
+
+#newArea{
+    margin-top: 7%;
+}
+
+.infoPoster{
+    margin:1%;
+}
+
+.infoPosterText{
+    margin-top: 7%;
+}
 
 
 /* My Shows Page*/
 
-.updateShowForm{
-    margin-left: 5%;
-}
-
 #update{
   width:10%;
-  padding:0px;
   margin-top: 10px;
   margin-bottom: 25px;
+  display: inline;
 
 }
 
@@ -322,8 +359,6 @@ h4{
 }
 
 .badgeForm{
-    border: 1px solid #cacaca;
-    border-radius: 6px;
     padding:30px;
     margin: 10px;
     height: 90%;
@@ -406,12 +441,6 @@ h4{
         width: 485%;
     }
 
-    #logout{
-        margin-left: 25%;
-    }
-    .call{
-        display:none;
-    }
     #poster1Txt{
         background-color: #454545;
         padding: 5px;
@@ -445,16 +474,6 @@ h4{
     .friendShow{
         width: 85%;
         margin-left: 8%;
-    }
-
-    #logout{
-        margin-left: 95%;
-    }
-    .loginCTA{
-        display: none;
-    }
-    .call{
-        display:none;
     }
     #poster1Txt{
         background-color: #454545;

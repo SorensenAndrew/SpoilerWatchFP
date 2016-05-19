@@ -1,10 +1,14 @@
 {%include 'nav.html'%}
-<h2 class="header">New User</h2>
-<form action="/addUser" method="post">
-    Username: <input type="text" name="newUser" style="margin:5px;">
-    <br>
-    Password: <input type="text" name="newPassword" style="margin:5px">
-    <br>
-    <input class="submit" type="submit" style="margin:5px">
-</form>
+    <div class="large-12 columns">
+        <h2 class="header">So you want to become a Watcher?</h2>
+        <p class="oathTxt">Being a Watcher is a serious mantle to bear. But if you think you're ready, sign your oath below.</p>
+    </div>
+    <form action="/addUser" class="large-4 columns" method="post">
+        <p class="oathTxt">I,</p><input placeholder="username" type="text" name="newUser" style="display:inline;">
+        <p class="oathTxt">Swear to uphold the values of the Watchers. To never willfully give away spoilers to fellow Watchers and to never play phone games while a new episode is airing.</p>
+        <p class="oathTxt"> Now, choose the secret pass code that will allow you entrance to the Watcher's fortress.</p>
+        <input placeholder="password" type="text" name="newPassword" style="display:inline;">
+        <p class="oathTxt">With these solumn words spoken, begin your watch, no matter what you choose to watch.</p>
+        <input value="Take your oath" class="submit" type="submit" style="display:inline;">
+    </form>
 

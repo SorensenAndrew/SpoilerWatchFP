@@ -1,9 +1,123 @@
 {%include 'nav.html'%}
-<form class="medium-2 columns addShow" action="/parseJSON" method="post">
-    <input placeholder="Show Title" class="addInput" name="title">
+<script>
+          $(function() {
+            var availableTags = [
+              "Game of Thrones",
+              "Dexter",
+              "Veronica Mars",
+              "Ballers",
+              "The Office",
+              "Silicon Valley",
+              "Scandal",
+              "House of Lies",
+              "Entourage",
+              "How I Met Your Mother",
+              "The Big Bang Theory",
+              "The Walking Dead",
+              "The Middle",
+              "Modern Family",
+              "NCIS",
+              "Empire",
+              "Scorpion",
+              "Blue Bloods",
+              "The Blacklist",
+              "How to Get Away With Murder",
+              "Madam Secretary",
+              "Criminal Minds",
+              "Person of Interest",
+              "Downton Abbey",
+              "The Good Wife",
+              "Two and a Half Men",
+              "The Mentalist",
+              "Mom",
+              "Fraggle Rock",
+              "The Odd Couple",
+              "Elementary",
+              "CSI",
+              "Chicago Fire",
+              "Stalker",
+              "Mike & Molly",
+              "Gotham",
+              "2 Broke Girls",
+              "Once Upon A Time",
+              "The Goldbergs",
+              "The West Wing",
+              "Sons of Anarchy",
+              "Oz",
+              "Better Call Saul",
+              "Breaking Bad",
+              "Family Guy",
+              "American Dad!",
+              "Archer",
+              "Last Man on Earth",
+              "The Simpsons",
+              "Sleepy Hollow",
+              "Marvel's Agent Carter",
+              "Brooklyn Nine-Nine",
+              "I Love Lucy",
+              "Gunsmoke",
+              "Cheers",
+              "Seinfeld",
+              "ER",
+              "Friends",
+              "That '70s Show",
+              "Last Week Tonight",
+              "Bob's Burgers",
+              "House of Cards",
+              "Orange is the new Black",
+              "Sherlock",
+              "The X-Files",
+              "Supernatural",
+              "Star Trek",
+              "Star Trek: The Next Generation",
+              "Star Trek: Voyager",
+              "Shameless",
+              "Heroes",
+              "The Flash",
+              "Vikings",
+              "Fear the Walking Dead",
+              "Grey's Anatomy",
+              "The 100",
+              "Peaky Blinders",
+              "Penny Dreadful",
+              "Agents of S.H.I.E.L.D.",
+              "Outlander",
+              "The Vampire Diaries",
+              "Legends of Tomorrow",
+              "Doctor Who",
+              "Daredevil",
+              "New Girl",
+              "Quantico",
+              "Bates Motel",
+              "Suits",
+              "Lucifer",
+              "Bones",
+              "iZombie",
+              "Grimm",
+              "Supergirl",
+              "Castle"
+            ];
+            $( "#tags" ).autocomplete({
+              source: availableTags
+            });
+          });
+        </script>
+<form class="large-12 columns addShow ui-widget" action="/parseJSON" method="post">
+    <input placeholder="Show Title" class="addInput" id="tags" name="title">
     <input placeholder="Season" class="addInput" name="season">
     <input placeholder="Episode #" class="addInput" name="episode">
-    <br>
     <input id="searchSubmit" class="submit" type="submit" value="Add Show">
 </form>
 
+<div class="large-6 columns">
+    <h3 class="header infoPosterText">Preacher premiers May 22nd on AMC!</h3>
+    <img class="infoPoster" src="../static/images/preacher.jpg">
+</div>
+
+<div class="large-6 columns">
+    <h3 class="header infoPosterText">Season 6 of Game of Thrones is here!</h3>
+    <img class="infoPoster" src="../static/images/got.jpg">
+</div>
+
+
+{%include 'footer.html'%}

@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
 	<head>
+        <script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
         <link href='http://fonts.googleapis.com/css?family=Lato|Source+Sans+Pro' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.css">
         <link href="../../static/styles.css" rel="stylesheet">
-        <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.js"></script>
         <script type="text/javascript">
             function myFunction() {
                 document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
                 }
         </script>
+
 
  <style type="text/less">
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic);
@@ -120,12 +122,12 @@
 	<body class="columns">
         <nav>
              <ul class="topnav">
-           <li><a class="header" id="sw" href="/home">Watcher</a></li>
-           <li><a href="/friendForm">Add Friends</a></li>
-           <li><a href="/friends">Friends List</a></li>
-           <li><a href="/showSearch">Add Shows</a></li>
-           <li><a href="/shows">My Shows</a></li>
-           <li><a href="/allBadges">Badges</a></li>
+           <li><a class="header" id="sw" href="/home">Watchers</a></li>
+           <li><a href="/friendForm" id="addFriendsNav">Add Friends</a></li>
+           <li><a href="/friends" id="friendsNav">Friends List</a></li>
+           <li><a href="/showSearch" id="addShows">Add Shows</a></li>
+           <li><a href="/shows" id="myShows">My Shows</a></li>
+           <li><a href="/allBadges" id="badgeNav">Badges</a></li>
            <li><a id="logout" href="/logout">Logout</a></li>
            <li class="icon">
                <a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
