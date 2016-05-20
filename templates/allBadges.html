@@ -1,13 +1,10 @@
 {%include 'nav.html'%}
 <!-- Icon made by http://www.flaticon.com/authors/freepik from www.flaticon.com -->
-
-<h3 class="header">All Badges</h3>
-{%for badge in badgeData %}
-<div class="large-3 columns iBadge">
-    <img src="../static/images/award.png">
-    <p class="badgeText">{{badge[0]}}</p>
-</div>
-
+    {%for badge in badgeData %}
+    <div class="large-3 columns iBadge">
+        <img src="../static/images/award.png">
+        <p class="badgeText">{{badge[0]}}</p>
+    </div>
 
 
 

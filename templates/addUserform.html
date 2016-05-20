@@ -1,14 +1,57 @@
-{%include 'nav.html'%}
-    <div class="large-12 columns">
-        <h2 class="header">So you want to become a Watcher?</h2>
-        <p class="oathTxt">Being a Watcher is a serious mantle to bear. But if you think you're ready, sign your oath below.</p>
-    </div>
-    <form action="/addUser" class="large-4 columns" method="post">
-        <p class="oathTxt">I,</p><input placeholder="username" type="text" name="newUser" style="display:inline;">
-        <p class="oathTxt">Swear to uphold the values of the Watchers. To never willfully give away spoilers to fellow Watchers and to never play phone games while a new episode is airing.</p>
-        <p class="oathTxt"> Now, choose the secret pass code that will allow you entrance to the Watcher's fortress.</p>
-        <input placeholder="password" type="text" name="newPassword" style="display:inline;">
-        <p class="oathTxt">With these solumn words spoken, begin your watch, no matter what you choose to watch.</p>
-        <input value="Take your oath" class="submit" type="submit" style="display:inline;">
-    </form>
+<html>
+<head>
+    <title>Welcome, Watchers</title>
+    <link href="../../static/styles.css" rel="stylesheet" >
+    <link href='http://fonts.googleapis.com/css?family=Lato|Source+Sans+Pro' rel='stylesheet' type='text/css'>
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.css">
+    <script src="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.js"></script>
+    <link href="../../static/styles.css" rel="stylesheet">
+    <script src="js/main.js"></script>
+</head>
+<body style="background-color: black; font-family: 'Walkway Semibold';">
+        <nav>
+             <ul class="topnav">
+           <h1><a class="header" id="sw" href="/login">Watchers</a></h1>
+        </ul>
+
+        </nav>
+
+        <div id="wufoo-mwhehus1xcxnjm">
+Fill out my <a href="https://pumaomega.wufoo.com/forms/mwhehus1xcxnjm">online form</a>.
+</div>
+<div id="wuf-adv" style="font-family:inherit;font-size: small;color:#a7a7a7;text-align:center;display:block;">There are tons of <a href="http://www.wufoo.com/features/">Wufoo features</a> to help make your forms awesome.</div>
+<script type="text/javascript">var mwhehus1xcxnjm;(function(d, t) {
+var s = d.createElement(t), options = {
+'userName':'pumaomega',
+'formHash':'mwhehus1xcxnjm',
+'autoResize':true,
+'height':'410',
+'async':true,
+'host':'wufoo.com',
+'header':'show',
+'ssl':true};
+s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.wufoo.com/scripts/embed/form.js';
+s.onload = s.onreadystatechange = function() {
+var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
+try { mwhehus1xcxnjm = new WufooForm();mwhehus1xcxnjm.initialize(options);mwhehus1xcxnjm.display(); } catch (e) {}};
+var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
+})(document, 'script');</script>
+
+
+
+
+        <!--<div class="large-12 columns">-->
+        <!--<h2 class="header">So you want to join the Watchers?</h2>-->
+        <!--<p class="oathTxt">Being a Watcher is a serious mantle to bear. But if you think you're ready, sign your oath below.</p>-->
+    <!--</div>-->
+    <!--<form action="/addUser" class="large-4 columns" method="post">-->
+        <!--<p class="oathTxt">I,</p><input placeholder="username" type="text" name="newUser" style="display:inline;">-->
+        <!--<p class="oathTxt">Swear to uphold the values of the Watchers. To never willfully give away spoilers to fellow Watchers and to never play phone games while a new episode is airing.</p>-->
+        <!--<p class="oathTxt"> Now, choose the secret pass code that will allow you entrance to the Watcher's fortress.</p>-->
+        <!--<input placeholder="password" type="text" name="newPassword" style="display:inline;">-->
+        <!--<p class="oathTxt">With these solumn words spoken, begin your watch, no matter what you choose to watch.</p>-->
+        <!--<input value="Take your oath" class="submit" type="submit" style="display:inline;">-->
+    <!--</form>-->
 

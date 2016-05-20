@@ -57,7 +57,7 @@ def show():
 
 #### Show Progress and Badges ####
 
-@app.route('/badges', methods=['post','get'])
+@app.route('/showInfo', methods=['post','get'])
 def badgePage():
     name = session["username"]
     showName = request.form['showName']
@@ -68,7 +68,7 @@ def badgePage():
     badgeCursor = db.cursor()
     badgeCursor.execute("select showName, badges from badges where showName='" + showName + "' and username='" + name + "'")
     badgeData = badgeCursor.fetchall()
-    return render_template('badges.html',showdata=showdata, badgeData = badgeData)
+    return render_template('showInfo.html',showdata=showdata, badgeData = badgeData)
 
 ### Show All Badges Page #####
 
@@ -241,7 +241,7 @@ def parseJSON():
             cursor5 = db.cursor()
             cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, showNumberBadge))
         db.commit()
-        return render_template('profilePage.html',data=data,newVar=new_count)
+        return render_template('addedNotification.html',data=data,newVar=new_count)
     except:
         return render_template('error.html')
 
@@ -313,7 +313,7 @@ def updateshow():
             cursor3 = db.cursor()
             cursor3.execute("insert into badges(username, showSeason, showName, badges)values(%s,%s,%s,%s)", (name, season, title, badge))
         db.commit()
-        return render_template('profilePage.html',data=data, newVar=new_count)
+        return render_template('addedNotification.html',data=data, newVar=new_count)
     except:
         return render_template('error.html')
 

@@ -10,7 +10,7 @@ body#dummybodyid {
 }
 
 body{
-    background-color: black;
+    background-color: #0d0d0d;
     background-repeat: repeat;
     color: white;
 }
@@ -114,25 +114,9 @@ ul.topnav li a:hover{
 }
 
 /* */
-.bubble{
-    border-radius: 6px;
-    border: 1px solid #cacaca;
-    padding:30px;
-    margin: 10px;
-    height: 55%;
-    width: 35%;
-    -webkit-box-shadow: 0 8px 6px -6px black;
-    -moz-box-shadow: 0 8px 6px -6px black;
-    box-shadow: 0 8px 6px -6px black;
-}
 
-.showContent{
-    text-align:center;
-
-}
 
 #showAdded{
-    background-color: #c7c7c7;
     font-size: 25px;
 
 }
@@ -283,11 +267,13 @@ span.ui-helper-hidden-accessible{
     border-radius: 0px;
     list-style: none;
     width: 30%;
+    z-index: 2;
+
 }
 
 .ui-menu .ui-menu-item a{
-    height:10px;
     font-size:25px;
+    z-index: 2;
     }
 
 #newArea{
@@ -295,11 +281,17 @@ span.ui-helper-hidden-accessible{
 }
 
 .infoPoster{
-    margin:1%;
+    margin-top:1%;
+    z-index: -1;
+    position: absolute;
 }
 
 .infoPosterText{
-    margin-top: 7%;
+    padding: 5px;
+    margin-top: 1%;
+    background-color: #4a4a4a;
+    z-index: 1;
+    position: absolute;
 }
 
 
@@ -314,7 +306,24 @@ span.ui-helper-hidden-accessible{
 }
 
 #showTile{
-    height: 85%;
+}
+
+.bubble{
+    border-radius: 6px;
+    background-color: #171717;
+    border: 1px solid #cacaca;
+    padding:30px;
+    margin: 10px;
+    height: 55%;
+    width: 35%;
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+}
+
+.showContent{
+    text-align:center;
+
 }
 
 /* Display Friends */
@@ -348,7 +357,7 @@ span.ui-helper-hidden-accessible{
 
 
 .badgeText{
-  color: white;
+  color: #0d0d0d;
   padding: 25px;
   font-size: 18px;
   text-align: center;
@@ -457,6 +466,9 @@ span.ui-helper-hidden-accessible{
         margin-left: 15%;
         background-color: #454545;
         padding: 5px;
+    }
+    #sw{
+        display: none;
     }
 
 }
