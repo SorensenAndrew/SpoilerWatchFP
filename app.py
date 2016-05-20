@@ -11,11 +11,35 @@ import mysql.connector
 app = Flask(__name__)
 app.secret_key = "4321"
 
+
+
 @app.route('/')
 def index():
     return redirect('/login')
 
-### Error Handling ####
+######## User Registration ########
+
+@app.route('/newUser')
+def newUser():
+    return render_template('addUserform.html')
+
+
+@app.route('/addUser',methods=['post', 'get'])
+def addUser():
+    try:
+        uname = request.form['newUser']
+        upass = request.form['newPassword']
+        db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
+        cursor = db.cursor()
+        cursor.execute("select username from users")
+        users = cursor.fetchall()
+        print users
+        cursor2 = db.cursor()
+        cursor2.execute("insert into users(username, password)values(%s,%s)", (uname, upass))
+        db.commit()
+        return redirect('/login')
+    except:
+        return render_template('usernameError.html')
 
 
 ###### News Feed #####
@@ -155,26 +179,6 @@ def deletefriend():
     return render_template('deleteConf.html')
 
 
-######## User Registration ########
-
-@app.route('/newUser')
-def newUser():
-    return render_template('addUserform.html')
-
-
-@app.route('/addUser',methods=['post', 'get'])
-def addUser():
-    uname = request.form['newUser']
-    upass = request.form['newPassword']
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
-    cursor = db.cursor()
-    cursor.execute("select username from users")
-    users = cursor.fetchall()
-    print users
-    cursor2 = db.cursor()
-    cursor2.execute("insert into users(username, password)values(%s,%s)", (uname, upass))
-    db.commit()
-    return redirect('/login')
 
 
 ################### Add Show ###################################################################
@@ -204,7 +208,7 @@ def parseJSON():
         seasondata= data['Season']
         plotData = data['Plot']
         airDate = data['Released']
-        posterID = data['imdbID']
+        posterID = data['seriesID']
         tE = int(totalEpisodes)
         eD = int(episodedata)
         db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')

@@ -25,7 +25,7 @@
 
     </script>
 
-  <form class="medium-12 columns badgeForm" action="deleteShow" method="post">
+  <form class="large-6 columns badgeForm" action="deleteShow" method="post">
     <br>
     <h4 class="showContent">{{show[0]}}</h4>
     <h5 class="showContent">"{{show[1]}}"</h5>
@@ -33,7 +33,6 @@
     <p class="showContent">Episode: {{show[3]}}</p>
     <p class="showContent">Max Ep: {{show[4]}}</p>
     <p>Plot Summary: {{show[5]}}</p>
-    <img src="http://img.omdbapi.com/?i=tt1480055&h=350&apikey=e24fb313">
     <p>Air Date: {{show[7]}}</p>
 
     <h5>Progress in Season:</h5>
@@ -57,6 +56,10 @@
     <input name="random" style="display:none;" value="{{show[0]}}">
     <input class="submit" type="submit" value="Delete Show">
 </form>
+
+<div class="large-4 columns">
+        <img src="http://img.omdbapi.com/?i={{show[6]}}&h=600&apikey=e24fb313">
+</div>
 
 
 
