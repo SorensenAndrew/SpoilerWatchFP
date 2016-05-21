@@ -126,13 +126,7 @@ ul.topnav li a:hover{
     color: #617799;
 }
 
-/* Login Page */
-
-.login{
-    margin-top: 10px;
-    margin-left: 15px;
-    margin-right: 15px;
-}
+/* ########### Login Page ############### */
 
 .submit {
     background-color: #454545;
@@ -383,8 +377,6 @@ span.ui-helper-hidden-accessible{
 }
 
 .badgeForm{
-    padding:30px;
-    margin: 10px;
     -webkit-box-shadow: 0 8px 6px -6px black;
     -moz-box-shadow: 0 8px 6px -6px black;
     box-shadow: 0 8px 6px -6px black;
@@ -427,6 +419,9 @@ span.ui-helper-hidden-accessible{
 
 /* Phone */
 @media screen and (min-width: 320px) and (max-width: 577px) {
+    .login{
+        width:50%;
+    }
     .bubble {
         width: 85%;
     }

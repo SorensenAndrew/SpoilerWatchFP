@@ -37,7 +37,7 @@ def addUser():
         cursor2 = db.cursor()
         cursor2.execute("insert into users(username, password)values(%s,%s)", (uname, upass))
         db.commit()
-        return redirect('/login')
+        return render_template('/newUserWelcome.html')
     except:
         return render_template('usernameError.html')
 
