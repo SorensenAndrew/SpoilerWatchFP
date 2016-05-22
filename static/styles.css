@@ -32,7 +32,6 @@ p, input, a{
 ul{
     font-size: 25px;
     margin-left: 25%;
-    margin-top: 15px;
 }
 
 /* Nav Stylings */
@@ -60,7 +59,6 @@ ul.topnav li a {
     color: #f2f2f2;
     text-align: center;
     padding: 14px 16px;
-    margin-top: 24px;
     text-decoration: none;
     transition: 0.3s;
     font-size: 17px;
@@ -81,24 +79,40 @@ ul.topnav li a:hover{
   background-color: #333;
 }
 
+#myShows{
+    margin-top: 20px;
+}
+
 #myShows:hover{
     background-color:#333;
+}
+
+#addShows{
+    margin-top: 20px;
 }
 
 #addShows:hover{
     background-color:#333;
 }
 
-#addFriendsNav:hover{
-    background-color:#333;
+#friendsNav{
+    margin-top: 20px;
 }
 
 #friendsNav:hover{
     background-color:#333;
 }
 
+#badgeNav{
+    margin-top: 20px;
+}
+
 #badgeNav:hover{
     background-color:#333;
+}
+
+#logout{
+    margin-top: 20px;
 }
 
 #logout:hover{
@@ -195,25 +209,32 @@ ul.topnav li a:hover{
 }
 
 
-/* ################### */
+/* ######## User news feed   ########### */
 
 .feed{
+    background-color: #171717;
     border: 1px solid #cacaca;
     border-radius: 6px;
     padding:30px;
     margin-left: 25%;
     margin-right: 25%;
     margin-bottom: 10px;
-    height: 20%;
     width: 50%;
     -webkit-box-shadow: 0 8px 6px -6px black;
     -moz-box-shadow: 0 8px 6px -6px black;
     box-shadow: 0 8px 6px -6px black;
 }
 
-
-
+#friendDataHome{
+    background-color: #171717;
+    border: none;
 }
+
+#friendDataHome{
+    margin-left: 46%;
+}
+
+
 h4{
     text-align: center;
 }
@@ -341,10 +362,14 @@ span.ui-helper-hidden-accessible{
 }
 
 #addFriendButton{
+        width: 10%;
         display: inline;
+        margin-left: 3px;
+
     }
 
 #findFriendInput{
+    width: 15%;
     display: inline;
 }
 

@@ -1,15 +1,11 @@
 {%include 'nav.html'%}
 
 
-<form class="large-12 columns" action="/updateShow" method="post">
-    <p><label for="title"></label></p><input placeholder="Show Title" id="title" name="title" title="Only use this form for updating shows you are already following.">
-    <input placeholder="Season" name="season">
-    <input placeholder="Episode #" name="episode">
+<form style="color:black;" class="large-12 columns" action="/updateShow" method="post">
+    <p><label for="title"></label></p><input style="line-height:none;" placeholder="Show Title" id="title" name="title" title="Only use this form for updating shows you are already following.">
+    <input style="line-height:none;" placeholder="Season" name="season">
+    <input style="line-height:none;" placeholder="Episode #" name="episode">
     <input id="update" class="submit" type="submit" value="Update Show">
-
-    <div class="medium-6-columns call">
-
-</div>
 
 </form>
 
@@ -33,7 +29,7 @@
 
 
 
-  <form class="large-4 columns bubble" action="/showInfo" method="post">
+  <form class="large-4 columns bubble"  action="/showInfo" method="post">
     <br>
     <h4 class="showContent">{{show[0]}}</h4>
     <h5 class="showContent" >"{{show[1]}}"</h5>

@@ -1,4 +1,9 @@
 {%include 'nav.html'%}
+<form class="large-12 columns" action="/addFriend" method="post">
+    <input class="large-6 columns" id="findFriendInput" placeholder="Friend Username" type="text" name="Addfriend">
+    <input value="+ Follow" id="addFriendButton" class="large-6 columns submit" type="submit">
+</form>
+
 <a href="/manageFriends" class="medium-12 columns" style="font-size:20px;">Manage Friends</a>
 {%for data in data%}
 <form class="friendBubble medium-2 columns" action="/friendData" method="post">

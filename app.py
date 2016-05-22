@@ -124,10 +124,6 @@ def checklogin():
 
 #### Friends List and Management ########
 
-@app.route('/friendForm', methods=['post','get'])
-def friendForm():
-    return render_template('addFriend.html')
-
 @app.route('/addFriend', methods=['post','get'])
 def addfriend():
     name = session["username"]
@@ -186,7 +182,7 @@ def deletefriend():
 @app.route('/parseJSON',methods=['post', 'get'])
 def parseJSON():
     try:
-        name = session["username"].title()
+        name = session["username"]
         title = request.form["title"].title()
         season = request.form['season']
         episode = request.form['episode']
