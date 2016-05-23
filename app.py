@@ -31,11 +31,7 @@ def addUser():
         upass = request.form['newPassword']
         db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
         cursor = db.cursor()
-        cursor.execute("select username from users")
-        users = cursor.fetchall()
-        print users
-        cursor2 = db.cursor()
-        cursor2.execute("insert into users(username, password)values(%s,%s)", (uname, upass))
+        cursor.execute("insert into users(username, password)values(%s,%s)", (uname, upass))
         db.commit()
         return render_template('/newUserWelcome.html')
     except:
@@ -49,7 +45,7 @@ def navhome():
     name = session["username"]
     db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
-    cursor.execute("select * from showData where username!='"+ name + "' order by dateAdded desc")
+    cursor.execute("select * from showdata sd join friends f on (f.username2=sd.username)where f.username1='"+ name+ "'")
     showdata = cursor.fetchall()
     return render_template('userHome.html',showdata=showdata)
 
@@ -130,16 +126,29 @@ def addfriend():
     friend = request.form['Addfriend']
     db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
-    cursor.execute("insert into friends(username1, username2)values(%s,%s)", (name, friend))
-    db.commit()
-    return redirect('/friends')
+    cursor.execute("select username from users where username='"+ friend + "'")
+    userCheck = cursor.fetchall()
+    if userCheck:
+        cursor3 = db.cursor()
+        cursor3.execute("select * from friends f where username1 = '"+ name+ "' and username2='"+ friend + "';")
+        friendCheck = cursor3.fetchall()
+        if friendCheck:
+            return render_template('error.html')
+        else:
+            cursor2 = db.cursor()
+            cursor2.execute("insert into friends(username1, username2)values(%s,%s)", (name, friend))
+            db.commit()
+            return redirect('/friends')
+
+
+
 
 @app.route('/friends')
 def friends():
     name = session["username"]
     db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
-    cursor.execute("select username1, username2 from friends where username1='"+ name+ "'")
+    cursor.execute("select username1, username2 from friends where username1='"+ name + "'")
     data = cursor.fetchall()
     return render_template('friends.html',data=data)
 
