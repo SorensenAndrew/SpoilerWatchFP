@@ -29,9 +29,8 @@
     <br>
     <h4 class="showContent">{{show[0]}}</h4>
     <h5 class="showContent">"{{show[1]}}"</h5>
-    <p class="showContent" id="seasonTitle">Season: {{show[2]}}</p>
-    <p class="showContent">Episode: {{show[3]}}</p>
-    <p class="showContent">Max Ep: {{show[4]}}</p>
+    <p class="showContent" id="seasonTitle">Season {{show[2]}}, Episode {{show[3]}} </p>
+    <p class="showContent">Total Season Episodes: {{show[4]}}</p>
     <p>Plot Summary: {{show[5]}}</p>
     <p>Air Date: {{show[7]}}</p>
 
@@ -58,7 +57,7 @@
 </form>
 
 <div class="large-4 columns img-container">
-        <img src="http://img.omdbapi.com/?i={{show[6]}}&h=600&apikey=e24fb313">
+        <img id="showPoster" src="http://img.omdbapi.com/?i={{show[6]}}&h=600&apikey=e24fb313">
 </div>
 
 
