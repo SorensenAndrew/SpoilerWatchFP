@@ -33,9 +33,12 @@ def addUser():
         cursor = db.cursor()
         cursor.execute("insert into users(username, password)values(%s,%s)", (uname, upass))
         db.commit()
+        db.close()
         return render_template('/newUserWelcome.html')
     except:
         return render_template('usernameError.html')
+
+
 
 
 ###### News Feed #####
@@ -47,6 +50,7 @@ def navhome():
     cursor = db.cursor()
     cursor.execute("select * from showdata sd join friends f on (f.username2=sd.username)where f.username1='"+ name+ "'")
     showdata = cursor.fetchall()
+    db.close()
     return render_template('userHome.html',showdata=showdata)
 
 
@@ -63,6 +67,7 @@ def users():
     cursor = db.cursor()
     cursor.execute("select * from users")
     data = cursor.fetchall()
+    db.close()
     return render_template('users.html',data=data)
 
 ###### Display Shows #######################
@@ -73,6 +78,7 @@ def show():
     cursor = db.cursor()
     cursor.execute("select showName, showTitle, showSeason, showEpisode,episodeCount from showData where username='"+ name+ "'")
     showdata = cursor.fetchall()
+    db.close()
     return render_template('shows.html',showdata=showdata)
 
 #### Show Progress and Badges ####
@@ -88,6 +94,7 @@ def badgePage():
     badgeCursor = db.cursor()
     badgeCursor.execute("select showName, badges from badges where showName='" + showName + "' and username='" + name + "'")
     badgeData = badgeCursor.fetchall()
+    db.close()
     return render_template('showInfo.html',showdata=showdata, badgeData = badgeData)
 
 ### Show All Badges Page #####
@@ -99,6 +106,7 @@ def allBadges():
     badgeCursor = db.cursor()
     badgeCursor.execute("select badges from badges where username='" + name + "'")
     badgeData = badgeCursor.fetchall()
+    db.close()
     return render_template('allBadges.html', badgeData = badgeData)
 
 ###### Verify user login ######
@@ -114,6 +122,7 @@ def checklogin():
     data = cursor.fetchall()
     if data:
         data = {"username":session["username"],"password":session["password"]}
+        db.close()
         return render_template('showSearch.html',data=data)
     else:
         return redirect('/login')
@@ -138,6 +147,7 @@ def addfriend():
             cursor2 = db.cursor()
             cursor2.execute("insert into friends(username1, username2)values(%s,%s)", (name, friend))
             db.commit()
+            db.close()
             return redirect('/friends')
 
 
@@ -150,6 +160,7 @@ def friends():
     cursor = db.cursor()
     cursor.execute("select username1, username2 from friends where username1='"+ name + "'")
     data = cursor.fetchall()
+    db.close()
     return render_template('friends.html',data=data)
 
 @app.route('/manageFriends', methods=['post', 'get'])
@@ -159,6 +170,7 @@ def friendmanager():
     cursor = db.cursor()
     cursor.execute("select username1, username2 from friends where username1='"+ name+ "'")
     data = cursor.fetchall()
+    db.close()
     return render_template('manageFriends.html',data=data)
 
 @app.route('/friendData',methods=['post', 'get'])
@@ -171,6 +183,7 @@ def frienddata():
     badgeCursor = db.cursor()
     badgeCursor.execute("select badges from badges where username='" + friendname + "'")
     badgeData = badgeCursor.fetchall()
+    db.close()
     return render_template('friendData.html',data=data, badgeData=badgeData)
 
 @app.route('/deleteFriends', methods=['post', 'get'])
@@ -181,6 +194,7 @@ def deletefriend():
     cursor = db.cursor()
     cursor.execute("delete from friends where username2='" + friendname + "' and username1='"+ name+ "'")
     db.commit()
+    db.close()
     return render_template('deleteConf.html')
 
 
@@ -195,6 +209,7 @@ def parseJSON():
         title = request.form["title"].title()
         season = request.form['season']
         episode = request.form['episode']
+        time = request.form['time']
         url = "http://www.omdbapi.com/?t=" + title +"&Season="+ season + "&Episode=" + episode +"&r=json&apikey=e24fb313 "
         url = url.replace(" ","%20")
         loadurl = urllib.urlopen(url)
@@ -218,7 +233,7 @@ def parseJSON():
         eD = int(episodedata)
         db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
         cursor = db.cursor()
-        cursor.execute("insert into showData(username, showTitle, showSeason, showEpisode, showName, episodeCount, plot, posterID, airDate)values(%s,%s,%s,%s,%s, %s, %s, %s, %s)", (name, titledata, seasondata, episodedata, title, totalEpisodes, plotData, posterID, airDate))
+        cursor.execute("insert into showData(username, showTitle, showSeason, showEpisode, showName, dateAdded, episodeCount, plot, posterID, airDate)values(%s,%s,%s,%s,%s, %s, %s, %s, %s, %s)", (name, titledata, seasondata, episodedata, title, time, totalEpisodes, plotData, posterID, airDate))
         cursor2 = db.cursor()
         cursor2.execute("select showEpisode, episodeCount from showData where showName='" + title + "'")
         new_count = cursor2.fetchall()
@@ -250,9 +265,11 @@ def parseJSON():
             cursor5 = db.cursor()
             cursor5.execute("insert into badges(username, badges)values(%s,%s)", (name, showNumberBadge))
         db.commit()
+        db.close()
         return render_template('addedNotification.html',data=data,newVar=new_count)
     except:
         return render_template('error.html')
+
 
 
 @app.route('/showSearch')
@@ -268,6 +285,7 @@ def deleteshow():
     cursor = db.cursor()
     cursor.execute("delete from showData where showName='" + random + "' and username='" + name + "'")
     db.commit()
+    db.close()
     return redirect('/shows')
 
 @app.route('/form')
@@ -282,11 +300,9 @@ def dataRoute():
     db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='CLEARDB_us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor2 = db.cursor2()
     cursor2.execute("select showName, showEpisode, episodeCount from showData where username='" + name + "'")
-    newVar = cursor2.fetchall()
-    print newVar
-    return  render_template('shows.html')
+    db.close()
+    return render_template('shows.html')
 
-# where username='" + name + "' and showName='" + showName + "'" #
 
 #### Show Update ###########
 
@@ -322,9 +338,11 @@ def updateshow():
             cursor3 = db.cursor()
             cursor3.execute("insert into badges(username, showSeason, showName, badges)values(%s,%s,%s,%s)", (name, season, title, badge))
         db.commit()
+        db.close()
         return render_template('addedNotification.html',data=data, newVar=new_count)
     except:
         return render_template('error.html')
+
 
 
 ######### Logout ###############

@@ -347,6 +347,17 @@ span.ui-helper-hidden-accessible{
 /* Show Info Page */
 
 
+.img-container {
+    width: 200px;
+    height: 800px;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.img-container img {
+    width: 100%;
+}
+
 
 /* Display Friends */
 
