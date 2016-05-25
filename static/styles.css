@@ -15,16 +15,19 @@ body{
     color: white;
 }
 
-.header{
+.header, h1, h2, h3, h4, h5{
     color: white;
-    font-family: 'Keep Calm Medium';
+    font-family: 'Lucida Bright';
 }
 
 p, input, a{
-    font-family: 'Walkway Semibold';
+    font-family: 'Gill Sans';
 
 }
 
+.clickable{
+    color:#57c7ff;
+}
 
 
 /* Error Page */
@@ -55,6 +58,7 @@ nav h1{
 ul.topnav li {float: left;}
 
 ul.topnav li a {
+    font-family: 'Gill Sans';
     display: inline-block;
     color: #f2f2f2;
     text-align: center;
@@ -73,6 +77,8 @@ ul.topnav li a:hover{
 #sw{
   font-size: 40px;
   color: white;
+  font-family: 'Lucida Bright';
+
 }
 
 #sw:hover{
@@ -137,7 +143,6 @@ ul.topnav li a:hover{
 #deleteConf{
     margin-left: 40%;
     margin-top: 5%;
-    color: #617799;
 }
 
 /* ########### Login Page ############### */
@@ -215,29 +220,34 @@ ul.topnav li a:hover{
     border: 1px solid #cacaca;
     border-radius: 6px;
     padding:30px;
-    margin-left: 25%;
-    margin-right: 25%;
-    margin-bottom: 10px;
-    width: 50%;
+    margin: 5px;
+    width: 30%;
+    overflow: auto;
     -webkit-box-shadow: 0 8px 6px -6px black;
     -moz-box-shadow: 0 8px 6px -6px black;
     box-shadow: 0 8px 6px -6px black;
+    align-container: center;
+
+}
+
+#feedScroll{
+
 }
 
 #friendDataHome{
     background-color: #171717;
     border: none;
+    font-size: 25px;
 }
 
-#friendDataHome{
-    margin-left: 46%;
+.showContent{
+    margin: 3px;
+    padding: 0;
 }
 
 
 #seasonTitle{
-  font-weight: bolder;
 }
-
 
 
 
@@ -352,7 +362,6 @@ span.ui-helper-hidden-accessible{
     border-radius: 6px;
     padding:30px;
     margin: 10px;
-    height: 25%;
 
 }
 
@@ -364,7 +373,7 @@ span.ui-helper-hidden-accessible{
     }
 
 #findFriendInput{
-    width: 15%;
+    width: 20%;
     display: inline;
 }
 

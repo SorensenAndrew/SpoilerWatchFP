@@ -107,7 +107,10 @@ def allBadges():
     badgeCursor.execute("select badges from badges where username='" + name + "'")
     badgeData = badgeCursor.fetchall()
     db.close()
-    return render_template('allBadges.html', badgeData = badgeData)
+    if badgeData:
+        return render_template('allBadges.html', badgeData = badgeData)
+    else:
+        return render_template('emptyBadgePage.html')
 
 ###### Verify user login ######
 
@@ -313,6 +316,7 @@ def updateshow():
         title = request.form["title"]
         season = request.form['season']
         episode = request.form['episode']
+        time = request.form['time']
         url = "http://www.omdbapi.com/?t=" + title +"&Season="+ season + "&Episode=" + episode +"&r=json"
         url = url.replace(" ","%20")
         loadurl = urllib.urlopen(url)
@@ -325,7 +329,7 @@ def updateshow():
         airdatedata = data['Released']
         db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
         cursor = db.cursor()
-        cursor.execute("update showData set showTitle=%s, showSeason=%s, showEpisode=%s, plot=%s, airDate=%s where showName='" + title + "' and username='" + name  + "'", (titledata, seasondata, episodedata, plotdata, airdatedata ))
+        cursor.execute("update showData set showTitle=%s, showSeason=%s, showEpisode=%s, dateAdded=%s, plot=%s, airDate=%s where showName='" + title + "' and username='" + name  + "'", (titledata, seasondata, episodedata, time, plotdata, airdatedata ))
         cursor2 = db.cursor()
         cursor2.execute("select showEpisode, episodeCount, plot, airDate from showData where showName='" + title + "'")
         new_count = cursor2.fetchall()

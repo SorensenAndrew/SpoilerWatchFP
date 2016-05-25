@@ -2,7 +2,7 @@
 <body>
 <div>
 
-{%for show in showdata|sort %}
+{%for show in showdata|reverse%}
 
 
     <script>
@@ -20,19 +20,22 @@
 
             console.log(th);
     </script>
+<div id="feedScroll">
+    <form class="medium-4 columns feed" action="/friendData" method="post">
+        <div class="medium-12 columns">
+            <p style="">{{show[5]}}</p>
+            <input style="font-family: 'Lucida Bright'; background-color:none;" id="friendDataHome" class="clickable showContent"  type="submit" value="{{show[0]}}">
+            <h5 class="showContent" style="font-weight:bold; font-size: 25px;">{{show[4]}}</h5>
+            <h5 style="font-size: 20px;" class="showContent">"{{show[1]}}"</h5>
+            <p class="showContent">Season {{show[2]}}, Episode {{show[3]}}</p>
+            <input name="time" style="display:none" value="{{show[5]}}">
+            <input name="friend" style="display:none;" value="{{show[0]}}">
+        </div>
+        <div class="medium-12 columns">
+            <img class="showContent" id="showPoster" src="http://img.omdbapi.com/?i={{show[8]}}&h=200&apikey=e24fb313">
+        </div>
 
-<form class="medium-6 columns feed" action="/friendData" method="post">
-    <br>
-    <p class="showContent " style="margin-right:500px">{{show[5]}}</p>
-    <input style="background-color:none; color:#2199e8;" id="friendDataHome"  type="submit" value="{{show[0]}}">
-    <h5 class="showContent" style="margin-top:10px;font-weight:bold;">{{show[4]}}</h5>
-    <h5 class="showContent" style="margin-top:10px;font-weight:bold;">"{{show[1]}}"</h5>
-    <p class="showContent" style="margin-top:10px;font-weight:bold;">Season: {{show[2]}}</p>
-    <p class="showContent" style="margin-top:10px;font-weight:bold;">Episode: {{show[3]}}</p>
-    <input name="time" style="display:none" value="{{show[5]}}">
-    <input name="friend" style="display:none;" value="{{show[0]}}">
-
-
-</form>
+    </form>
+    </div>
 </div>
 {%endfor%}

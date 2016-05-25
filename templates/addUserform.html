@@ -9,36 +9,20 @@
     <script src="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.js"></script>
     <link href="../../static/styles.css" rel="stylesheet">
     <script src="js/main.js"></script>
+    <script src="../static/js/pngLib.js"></script>
+    <script>
+        var data = new Identicon('hash', 420).toString();
+        document.write('<img width=420 height=420 src="data:image/png;base64,' + data + '">');
+
+    </script>
 </head>
 <body style="background-color: black; font-family: 'Walkway Semibold';">
         <nav>
              <ul class="topnav">
-           <h1><a class="header" id="sw" href="/login">Watchers</a></h1>
+             <a class="header" id="sw" href="/login">Watchers</a>
         </ul>
 
         </nav>
-
-        <!--<div id="wufoo-mwhehus1xcxnjm">-->
-<!--Fill out my <a href="https://pumaomega.wufoo.com/forms/mwhehus1xcxnjm">online form</a>.-->
-<!--</div>-->
-<!--<div id="wuf-adv" style="font-family:inherit;font-size: small;color:#a7a7a7;text-align:center;display:block;">There are tons of <a href="http://www.wufoo.com/features/">Wufoo features</a> to help make your forms awesome.</div>-->
-<!--<script type="text/javascript">var mwhehus1xcxnjm;(function(d, t) {-->
-<!--var s = d.createElement(t), options = {-->
-<!--'userName':'pumaomega',-->
-<!--'formHash':'mwhehus1xcxnjm',-->
-<!--'autoResize':true,-->
-<!--'height':'410',-->
-<!--'async':true,-->
-<!--'host':'wufoo.com',-->
-<!--'header':'show',-->
-<!--'ssl':true};-->
-<!--s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.wufoo.com/scripts/embed/form.js';-->
-<!--s.onload = s.onreadystatechange = function() {-->
-<!--var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;-->
-<!--try { mwhehus1xcxnjm = new WufooForm();mwhehus1xcxnjm.initialize(options);mwhehus1xcxnjm.display(); } catch (e) {}};-->
-<!--var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);-->
-<!--})(document, 'script');</script>-->
-
 
         <div class="large-12 columns">
         <h2 class="header">So you want to join the Watchers?</h2>

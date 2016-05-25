@@ -144,19 +144,9 @@
 
         <script>
 
-            var date = new Date();
-
-            var t = date.toString();
-
-            var res = t.split(" ",4);
-
-            var dateTime = res.toString();
-
-            var theDate = dateTime.replace(/,/g , " ");
-
-            var formattedDate = document.getElementById("time").value = theDate;
-
-            console.log(theDate);
+             window.onload = function() {
+               document.getElementById('time').value = getTime();
+             }
         </script>
 
 <form style="margin-top: -25px;" class="large-12 columns addShow ui-widget" action="/parseJSON" method="post">
@@ -307,16 +297,6 @@
 
     <!-- #endregion Jssor Slider End -->
 
-
-<!--<div class="large-7 columns">-->
-    <!--<h3 class="header infoPosterText">A Vertigo Comics original comes to TV!</h3>-->
-    <!--<img class="infoPoster" src="../static/images/preacher2.jpg">-->
-<!--</div>-->
-
-<!--<div class="large-7 columns">-->
-    <!--<h3 class="header infoPosterText">Season 6 of Game of Thrones is here!</h3>-->
-    <!--<img class="infoPoster" src="../static/images/got.jpg">-->
-<!--</div>-->
 
 
 {%include 'footer.html'%}
