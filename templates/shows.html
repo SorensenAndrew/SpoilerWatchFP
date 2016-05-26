@@ -1,11 +1,11 @@
 {%include 'nav.html'%}
 
-
-<form style="color:black; margin-top: -25px;" class="large-12 columns" action="/updateShow" method="post">
+<form style="color:black; margin-top: -25px;" class="large-12 columns " action="/updateShow" method="post">
     <p><label for="title"></label></p><input class="addInput" placeholder="Show Title" id="title" name="title" title="Only use this form for updating shows you are already following.">
     <input class="addInput" placeholder="Season" name="season">
     <input class="addInput" placeholder="Episode #" name="episode">
     <input id="update" class="submit" type="submit" value="Update Show">
+    <input style="display:none;" id="updateTime" name="time" type="text">
 
 </form>
 
@@ -13,7 +13,7 @@
 {%for show in showdata %}
 
 
-
+<!-- Radial Wheel Javascript -->
      <script type="text/javascript">
 
           $(function(){
@@ -24,28 +24,22 @@
                 $('.radial-progress').attr('data-progress', Math.floor(showProgress));
     });
     </script>
-    <script>
-
-             window.onload = function() {
-               document.getElementById('time').value = getTime();
-             }
-        </script>
 
 
 
 
+<!-- Current User's displayed shows  -->
 
-  <form class="large-3 columns bubble"  action="/showInfo" method="post">
-    <h4 class="showContent">{{show[0]}}</h4>
-    <p class="showContent" id="seasonTitle">Season {{show[2]}}, Episode {{show[3]}}</p>
-      <input name="showName" style="display:none;" value="{{show[0]}}">
-      <input name="season" style="display:none;" value="{{show[2]}}">
-      <input name="currentEpisode" style="display:none;" value="{{show[3]}}">
-      <input name="lastEpisode" style="display:none;" value="{{show[4]}}">
-    <input name="random" style="display:none;" value="{{show[0]}}">
-    <input style="display:none;" id="time" name="time" type="text">
+  <form class="large-3 columns bubble" style="text-align: center;"  action="/showInfo" method="post">
+          <h4 class="showContent">{{show[0]}}</h4>
+          <p class="showContent" id="seasonTitle">Season {{show[2]}}, Episode {{show[3]}}</p>
+          <input name="showName" style="display:none;" value="{{show[0]}}">
+          <input name="season" style="display:none;" value="{{show[2]}}">
+          <input name="currentEpisode" style="display:none;" value="{{show[3]}}">
+          <input name="lastEpisode" style="display:none;" value="{{show[4]}}">
+          <input name="random" style="display:none;" value="{{show[0]}}">
+          <input style="color:white;" id="showInfoButton" class="submit" type="submit" value="{{show[1]}}">
 
-    <input id="showInfoButton" class="submit" type="submit" value="{{show[1]}}">
 </form>
 
 

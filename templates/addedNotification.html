@@ -1,11 +1,11 @@
+<!-- Notification page for new show added -->
+
 {%include 'nav.html'%}
 <br>
-<div id="showAdded">
+<div style="text-align: center;" id="showAdded">
     <p class="showContent">"{{data['Title']}}"</p>
 
-    <p class="showContent">Season: {{data['Season']}}</p>
-
-    <p class="showContent">Episode: {{data['Episode']}}</p>
+    <p class="showContent">Season {{data['Season']}}, Episode {{data['Episode']}}</p>
 
     <p class="showContent">This show has been added to the list of series you follow.</p>
 

@@ -1,3 +1,5 @@
+// Javascript function for time
+
 var date = new Date();
 
             var t = date.toString();
@@ -8,8 +10,6 @@ var date = new Date();
 
             var theDate = dateTime.replace(/,/g , " ");
 
-            var formattedDate = document.getElementById("time").value = theDate;
-
-            function getTime(){
+            function updateTime(){
                  return theDate;
             }

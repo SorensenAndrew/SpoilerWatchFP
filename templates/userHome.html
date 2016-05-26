@@ -1,37 +1,23 @@
 {%include 'nav.html'%}
 <body>
 <div>
-
+<!-- User news feed -->
 {%for show in showdata|reverse%}
 
-
-    <script>
-
-            var date = new Date();
-
-            var t = date.toString();
-
-            var res = t.split(" ",4);
-
-            var dateTime = res.toString();
-
-            var th = dateTime.replace(/,/g , " ");
-
-
-            console.log(th);
-    </script>
 <div id="feedScroll">
     <form class="medium-4 columns feed" action="/friendData" method="post">
+        <p style="">{{show[5]}}</p>
         <div class="medium-12 columns">
-            <p style="">{{show[5]}}</p>
-            <input style="font-family: 'Lucida Bright'; background-color:none;" id="friendDataHome" class="clickable showContent"  type="submit" value="{{show[0]}}">
-            <h5 class="showContent" style="font-weight:bold; font-size: 25px;">{{show[4]}}</h5>
-            <h5 style="font-size: 20px;" class="showContent">"{{show[1]}}"</h5>
-            <p class="showContent">Season {{show[2]}}, Episode {{show[3]}}</p>
+            <div style="text-align:center;" class="large-12 columns">
+                <input style="color:#57c7ff; font-family: 'Lucida Bright'; background-color:none;" class="friendDataHome" class="clickable showContent"  type="submit" value="{{show[0]}}">
+                <h5 class="showContent" style="font-weight:bold; font-size: 25px;">{{show[4]}}</h5>
+                <h5 style="font-size: 18px;" class="showContent">"{{show[1]}}"</h5>
+                <p class="showContent">Season {{show[2]}}, Episode {{show[3]}}</p>
+            </div>
             <input name="time" style="display:none" value="{{show[5]}}">
             <input name="friend" style="display:none;" value="{{show[0]}}">
         </div>
-        <div class="medium-12 columns">
+        <div style="text-align:center;" class="medium-12 columns">
             <img class="showContent" id="showPoster" src="http://img.omdbapi.com/?i={{show[8]}}&h=200&apikey=e24fb313">
         </div>
 

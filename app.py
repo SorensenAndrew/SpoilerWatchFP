@@ -29,16 +29,35 @@ def addUser():
     try:
         uname = request.form['newUser']
         upass = request.form['newPassword']
+        h = hashlib.md5(upass.encode())
+        hashPass = h.hexdigest()
         db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
         cursor = db.cursor()
-        cursor.execute("insert into users(username, password)values(%s,%s)", (uname, upass))
+        cursor.execute("insert into users(username, password)values(%s,%s)", (uname, hashPass))
         db.commit()
         db.close()
         return render_template('/newUserWelcome.html')
     except:
         return render_template('usernameError.html')
 
+###### Verify user login ######
 
+@app.route('/checklogin', methods=['post','get'])
+def checklogin():
+    session["username"] = request.form["username"]
+    session["password"] = request.form["password"]
+    h = hashlib.md5(session["password"].encode())
+    hashPass = h.hexdigest()
+    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
+    cursor = db.cursor()
+    cursor.execute("select * from users where username=%s and password=%s", (session["username"], hashPass))
+    data = cursor.fetchall()
+    if data:
+        data = {"username":session["username"],"password":hashPass}
+        db.close()
+        return render_template('showSearch.html',data=data)
+    else:
+        return redirect('/login')
 
 
 ###### News Feed #####
@@ -48,6 +67,7 @@ def navhome():
     name = session["username"]
     db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
+    # Selects only users on the current user's friend list
     cursor.execute("select * from showdata sd join friends f on (f.username2=sd.username)where f.username1='"+ name+ "'")
     showdata = cursor.fetchall()
     db.close()
@@ -61,14 +81,6 @@ def navhome():
 def login():
     return render_template('login.html')
 
-@app.route('/users')
-def users():
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
-    cursor = db.cursor()
-    cursor.execute("select * from users")
-    data = cursor.fetchall()
-    db.close()
-    return render_template('users.html',data=data)
 
 ###### Display Shows #######################
 @app.route('/shows')
@@ -76,7 +88,7 @@ def show():
     name = session["username"]
     db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
-    cursor.execute("select showName, showTitle, showSeason, showEpisode,episodeCount from showData where username='"+ name+ "'")
+    cursor.execute("select showName, showTitle, showSeason, showEpisode,episodeCount, posterID from showData where username='"+ name+ "'")
     showdata = cursor.fetchall()
     db.close()
     return render_template('shows.html',showdata=showdata)
@@ -107,28 +119,12 @@ def allBadges():
     badgeCursor.execute("select badges from badges where username='" + name + "'")
     badgeData = badgeCursor.fetchall()
     db.close()
+    ### Check to see if a user has any badges unlocked, display message in place of badges if none found ####
     if badgeData:
         return render_template('allBadges.html', badgeData = badgeData)
     else:
         return render_template('emptyBadgePage.html')
 
-###### Verify user login ######
-
-@app.route('/checklogin', methods=['post','get'])
-def checklogin():
-    session["username"] = request.form["username"]
-    session["password"] = request.form["password"]
-    db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
-    cursor = db.cursor()
-    hashval = hashlib.md5(request.form["password"]).hexdigest()
-    cursor.execute("select * from users where username=%s and password=%s", (session["username"], session["password"]))
-    data = cursor.fetchall()
-    if data:
-        data = {"username":session["username"],"password":session["password"]}
-        db.close()
-        return render_template('showSearch.html',data=data)
-    else:
-        return redirect('/login')
 
 #### Friends List and Management ########
 
@@ -140,6 +136,7 @@ def addfriend():
     cursor = db.cursor()
     cursor.execute("select username from users where username='"+ friend + "'")
     userCheck = cursor.fetchall()
+    ## Check if user exists, then check if user is already a friend
     if userCheck:
         cursor3 = db.cursor()
         cursor3.execute("select * from friends f where username1 = '"+ name+ "' and username2='"+ friend + "';")
@@ -178,11 +175,13 @@ def friendmanager():
 
 @app.route('/friendData',methods=['post', 'get'])
 def frienddata():
+    ### Select friends show data ###
     friendname = request.form['friend']
     db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
     cursor = db.cursor()
     cursor.execute("select showName, showTitle, showSeason, showEpisode from showData where username='" + friendname + "'")
     data = cursor.fetchall()
+    ## Select friend's badges ###
     badgeCursor = db.cursor()
     badgeCursor.execute("select badges from badges where username='" + friendname + "'")
     badgeData = badgeCursor.fetchall()
@@ -213,6 +212,7 @@ def parseJSON():
         season = request.form['season']
         episode = request.form['episode']
         time = request.form['time']
+        ### Connect to API, with API Key ###
         url = "http://www.omdbapi.com/?t=" + title +"&Season="+ season + "&Episode=" + episode +"&r=json&apikey=e24fb313 "
         url = url.replace(" ","%20")
         loadurl = urllib.urlopen(url)
@@ -221,6 +221,7 @@ def parseJSON():
         url2 = url2.replace(" ","%20")
         loadurl2 = urllib.urlopen(url2)
         data2 = json.loads(loadurl2.read().decode(loadurl2.info().getparam('charset') or 'utf-8'))
+        # Get total number of episodes for the given season
         episodeCount = []
         episodeCount.append(data2['Episodes'])
         for i in range(len(episodeCount)):
@@ -240,12 +241,14 @@ def parseJSON():
         cursor2 = db.cursor()
         cursor2.execute("select showEpisode, episodeCount from showData where showName='" + title + "'")
         new_count = cursor2.fetchall()
+        # Checking data to see if user qualifies to earn a badge
         if eD == tE:
             badge = "You have completed season '" + season + "' of '" + title + "'"
             cursor3 = db.cursor()
             cursor3.execute("insert into badges(username, showSeason, showName, badges)values(%s,%s,%s,%s)", (name, season, title, badge))
         cursor4 = db.cursor()
         cursor4.execute("select showName from showData where username='" + name + "'")
+        ### Badges based on number of shows followed ###
         totalShowsFollowed = cursor4.fetchall()
         if len(totalShowsFollowed) == 5:
             showNumberBadge = "Following 5 Shows!"
@@ -291,11 +294,8 @@ def deleteshow():
     db.close()
     return redirect('/shows')
 
-@app.route('/form')
-def form():
-    return render_template('form.html')
 
-### Javascript Fetch Data ####
+###  Fetch Data ####
 
 @app.route('/dataRoute', methods=['get'])
 def dataRoute():
@@ -316,7 +316,6 @@ def updateshow():
         title = request.form["title"]
         season = request.form['season']
         episode = request.form['episode']
-        time = request.form['time']
         url = "http://www.omdbapi.com/?t=" + title +"&Season="+ season + "&Episode=" + episode +"&r=json"
         url = url.replace(" ","%20")
         loadurl = urllib.urlopen(url)
@@ -329,7 +328,7 @@ def updateshow():
         airdatedata = data['Released']
         db = mysql.connector.connect(user='b31545577f01ed', password='7bc97660',host='us-cdbr-iron-east-04.cleardb.net', database='heroku_0762eace2527e49')
         cursor = db.cursor()
-        cursor.execute("update showData set showTitle=%s, showSeason=%s, showEpisode=%s, dateAdded=%s, plot=%s, airDate=%s where showName='" + title + "' and username='" + name  + "'", (titledata, seasondata, episodedata, time, plotdata, airdatedata ))
+        cursor.execute("update showData set showTitle=%s, showSeason=%s, showEpisode=%s, plot=%s, airDate=%s where showName='" + title + "' and username='" + name  + "'", (titledata, seasondata, episodedata, plotdata, airdatedata))
         cursor2 = db.cursor()
         cursor2.execute("select showEpisode, episodeCount, plot, airDate from showData where showName='" + title + "'")
         new_count = cursor2.fetchall()
@@ -337,6 +336,7 @@ def updateshow():
         cursor3.execute("select episodeCount from showData where showName='" + title + "'")
         testvar = cursor3.fetchone()
         tE = testvar[0]
+        ### Badge for updating to last episode in a given season
         if eD == tE:
             badge = "You have completed season '" + season + "' of '" + title + "'"
             cursor3 = db.cursor()
@@ -358,11 +358,6 @@ def logout():
 
 ############################
 
-@app.route('/formtest', methods=['post','get'])
-def formtest():
-    userinput = request.form["user"]
-    hashed = hashlib.md5(userinput).hexdigest()
-    return hashed
 
 
 if __name__ == '__main__':

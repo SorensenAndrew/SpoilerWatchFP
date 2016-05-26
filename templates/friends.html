@@ -1,20 +1,46 @@
 {%include 'nav.html'%}
 <form class="large-8 columns" action="/addFriend" method="post">
     <input class="large-6 columns" id="findFriendInput" placeholder="Friend Username" type="text" name="Addfriend">
-    <input value="+ Follow" id="addFriendButton" class="large-6 columns submit" type="submit">
+    <input style="color:white;" value="+ Follow" id="addFriendButton" class="large-6 columns submit" type="submit">
 </form>
 
 <a href="/manageFriends" class="large-12 columns clickable" style="font-size:20px;">Manage Friends</a>
 {%for data in data%}
-<form class="friendBubble large-2 columns" action="/friendData" method="post">
-    <br>
-    <p>{{data[1]}}</p>
-    <br>
-    <input class="submit" id="seeFriendShows"  type="submit" value="See Shows">
+<form class="friendBubble large-1 columns" action="/friendData" method="post">
+    <input class="submit clickable friendDataHome" type="submit" value="{{data[1]}}">
     <input name="friend" style="display:none;" value="{{data[1]}}">
     <br>
 </form>
 {%endfor%}
 
+
+<!-- Mock Data -->
+<div id="welcome" class="large-12 columns">
+        <h2 style="margin-top: 25px;" class="header">Featured Users </h2>
+        </div>
+<div class="large-4 columns" style="border-right: 1px solid white; text-align: center;">
+    <input type="submit" class="large-12 columns clickable friendRec" value="james">
+    <h5 style="margin-top:10px;" class="large-12 columns">Watches:</h5>
+    <p class="large-12 columns">Game of Thrones</p>
+    <p class="large-12 columns">How I Met Your Mother</p>
+    <p class="large-12 columns">Dexter</p>
+
+</div>
+<div class="large-4 columns" style="border-right: 1px solid white; text-align: center;">
+    <input type="submit" class="large-12 columns clickable friendRec" value="spock">
+    <h5 style="margin-top:10px;" class="large-12 columns">Watches:</h5>
+    <p class="large-12 columns">Breaking Bad</p>
+    <p class="large-12 columns">The Office</p>
+    <p class="large-12 columns">Scandal</p>
+
+</div>
+<div class="large-4 columns" style="text-align: center;">
+    <input type="submit" class="large-12 columns clickable friendRec" value="Harold">
+    <h5 style="margin-top:10px;" class="large-12 columns">Watches:</h5>
+    <p class="large-12 columns">Blue Bloods</p>
+    <p class="large-12 columns">Game of Thrones</p>
+    <p class="large-12 columns">Vice</p>
+
+</div>
 {%include 'footer.html'%}
 
